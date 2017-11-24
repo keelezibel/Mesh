@@ -12,21 +12,21 @@
 		5114B1491D3D975E002D339B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5114B1471D3D975E002D339B /* Main.storyboard */; };
 		5114B14B1D3D975E002D339B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5114B14A1D3D975E002D339B /* Assets.xcassets */; };
 		5114B14E1D3D975E002D339B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5114B14C1D3D975E002D339B /* LaunchScreen.storyboard */; };
-		5114B16B1D3DAC84002D339B /* BFTransmitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5114B16A1D3DAC84002D339B /* BFTransmitter.framework */; };
 		5114B1711D3DAF2B002D339B /* ChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1701D3DAF2B002D339B /* ChatListController.m */; };
 		5114B1741D3DB7EA002D339B /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1731D3DB7EA002D339B /* ChatViewController.m */; };
 		5114B1771D3ED4F4002D339B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1761D3ED4F4002D339B /* Message.m */; };
-		5114B1791D3EE472002D339B /* BFTransmitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5114B16A1D3DAC84002D339B /* BFTransmitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7E8055B21FC7D7DE00887880 /* BFTransmitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8055B11FC7D7DE00887880 /* BFTransmitter.framework */; };
+		7E8055B31FC7D7DE00887880 /* BFTransmitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8055B11FC7D7DE00887880 /* BFTransmitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		5114B1611D3DA1C3002D339B /* Embed Frameworks */ = {
+		7E8055B41FC7D7DE00887880 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5114B1791D3EE472002D339B /* BFTransmitter.framework in Embed Frameworks */,
+				7E8055B31FC7D7DE00887880 /* BFTransmitter.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -42,13 +42,13 @@
 		5114B14A1D3D975E002D339B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5114B14D1D3D975E002D339B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5114B14F1D3D975E002D339B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5114B16A1D3DAC84002D339B /* BFTransmitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BFTransmitter.framework; path = ../../../BFTransmitter.framework; sourceTree = "<group>"; };
 		5114B16F1D3DAF2B002D339B /* ChatListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListController.h; sourceTree = "<group>"; };
 		5114B1701D3DAF2B002D339B /* ChatListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListController.m; sourceTree = "<group>"; };
 		5114B1721D3DB7EA002D339B /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		5114B1731D3DB7EA002D339B /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		5114B1751D3ED4F4002D339B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		5114B1761D3ED4F4002D339B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		7E8055B11FC7D7DE00887880 /* BFTransmitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BFTransmitter.framework; path = ../../../BFTransmitter.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5114B16B1D3DAC84002D339B /* BFTransmitter.framework in Frameworks */,
+				7E8055B21FC7D7DE00887880 /* BFTransmitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +66,7 @@
 		5114B1321D3D975E002D339B = {
 			isa = PBXGroup;
 			children = (
-				5114B16A1D3DAC84002D339B /* BFTransmitter.framework */,
+				7E8055B11FC7D7DE00887880 /* BFTransmitter.framework */,
 				5114B13D1D3D975E002D339B /* ChatSample */,
 				5114B13C1D3D975E002D339B /* Products */,
 			);
@@ -118,7 +118,7 @@
 				5114B1371D3D975E002D339B /* Sources */,
 				5114B1381D3D975E002D339B /* Frameworks */,
 				5114B1391D3D975E002D339B /* Resources */,
-				5114B1611D3DA1C3002D339B /* Embed Frameworks */,
+				7E8055B41FC7D7DE00887880 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -140,7 +140,7 @@
 				TargetAttributes = {
 					5114B13A1D3D975E002D339B = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = FMC5MLL736;
+						DevelopmentTeam = 96XBZBC874;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -302,7 +302,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 96XBZBC874;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/ChatSample",
 					"$(PROJECT_DIR)",
@@ -311,7 +311,7 @@
 				INFOPLIST_FILE = ChatSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = transmitter.chat.ChatSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.mesh2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -323,7 +323,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 96XBZBC874;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/ChatSample",
 					"$(PROJECT_DIR)",
@@ -332,7 +332,7 @@
 				INFOPLIST_FILE = ChatSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = transmitter.chat.ChatSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.mesh2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

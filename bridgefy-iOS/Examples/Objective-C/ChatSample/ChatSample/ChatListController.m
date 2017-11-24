@@ -51,7 +51,7 @@ NSString * const peerTypeKey = @"device_type";
     
     //Transmitter initialization
     [BFTransmitter setLogLevel:BFLogLevelTrace];
-    self.transmitter = [[BFTransmitter alloc] initWithApiKey:@"YOUR API KEY"];
+    self.transmitter = [[BFTransmitter alloc] initWithApiKey:@"9c0d240e-5cda-4290-87c9-336ac93069fa"];
     self.transmitter.delegate = self;
     self.transmitter.backgroundModeEnabled = YES;
     [self.transmitter start];
