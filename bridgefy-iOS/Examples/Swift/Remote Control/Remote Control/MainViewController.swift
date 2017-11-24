@@ -39,7 +39,7 @@ class MainViewController: UIViewController, BFTransmitterDelegate {
         
         // Transmitter initialization
         BFTransmitter.setLogLevel(.error)
-        self.transmitter = BFTransmitter(apiKey: "YOUR API KEY")
+        self.transmitter = BFTransmitter(apiKey: "9c0d240e-5cda-4290-87c9-336ac93069fa")
         self.transmitter?.delegate = self
         self.transmitter?.isBackgroundModeEnabled = true
         self.transmitter?.start()

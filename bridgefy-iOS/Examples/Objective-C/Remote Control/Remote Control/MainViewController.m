@@ -55,7 +55,7 @@ typedef NS_ENUM(NSUInteger, Command) {
     
     //Transmitter initialization
     [BFTransmitter setLogLevel:BFLogLevelError];
-    self.transmitter = [[BFTransmitter alloc] initWithApiKey:@"YOUR API KEY"];
+    self.transmitter = [[BFTransmitter alloc] initWithApiKey:@"9c0d240e-5cda-4290-87c9-336ac93069fa"];
     self.transmitter.delegate = self;
     self.transmitter.backgroundModeEnabled = YES;
     [self.transmitter start];

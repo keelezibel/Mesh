@@ -11,24 +11,25 @@
 		3E5BE9881F1538F40065C3CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5BE9861F1538F40065C3CF /* Main.storyboard */; };
 		3E5BE98A1F1538F40065C3CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E5BE9891F1538F40065C3CF /* Assets.xcassets */; };
 		3E5BE98D1F1538F40065C3CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5BE98B1F1538F40065C3CF /* LaunchScreen.storyboard */; };
-		3E5BE9951F153AC30065C3CF /* BFTransmitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5BE9941F153AC30065C3CF /* BFTransmitter.framework */; };
-		3E5BE9961F153AC30065C3CF /* BFTransmitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5BE9941F153AC30065C3CF /* BFTransmitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E5BE9991F153D600065C3CF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BE9981F153D600065C3CF /* MainViewController.swift */; };
 		3E5BE99B1F153DB40065C3CF /* AdminViewTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BE99A1F153DB40065C3CF /* AdminViewTabBarController.swift */; };
 		3E5BE99D1F153DC80065C3CF /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BE99C1F153DC80065C3CF /* ImagePickerViewController.swift */; };
 		3E5BE99F1F153DD30065C3CF /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BE99E1F153DD30065C3CF /* ColorPickerViewController.swift */; };
 		3E5BE9A11F153DDD0065C3CF /* InputTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BE9A01F153DDD0065C3CF /* InputTextViewController.swift */; };
 		3E5BE9A31F153DED0065C3CF /* FlashlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BE9A21F153DED0065C3CF /* FlashlightViewController.swift */; };
+		7EA422721FBEAA1300E2426A /* BFTransmitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA422711FBEAA1300E2426A /* BFTransmitter.framework */; };
+		7EA422731FBEAA1300E2426A /* BFTransmitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA422711FBEAA1300E2426A /* BFTransmitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7EA422751FBEB3C300E2426A /* sports.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EA422741FBEB3C300E2426A /* sports.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3E5BE9971F153AC30065C3CF /* Embed Frameworks */ = {
+		7EA422701FBEA9B400E2426A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3E5BE9961F153AC30065C3CF /* BFTransmitter.framework in Embed Frameworks */,
+				7EA422731FBEAA1300E2426A /* BFTransmitter.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -42,13 +43,14 @@
 		3E5BE9891F1538F40065C3CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E5BE98C1F1538F40065C3CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E5BE98E1F1538F40065C3CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E5BE9941F153AC30065C3CF /* BFTransmitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BFTransmitter.framework; path = ../../../BFTransmitter.framework; sourceTree = "<group>"; };
 		3E5BE9981F153D600065C3CF /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3E5BE99A1F153DB40065C3CF /* AdminViewTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewTabBarController.swift; sourceTree = "<group>"; };
 		3E5BE99C1F153DC80065C3CF /* ImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		3E5BE99E1F153DD30065C3CF /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		3E5BE9A01F153DDD0065C3CF /* InputTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTextViewController.swift; sourceTree = "<group>"; };
 		3E5BE9A21F153DED0065C3CF /* FlashlightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashlightViewController.swift; sourceTree = "<group>"; };
+		7EA422711FBEAA1300E2426A /* BFTransmitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BFTransmitter.framework; path = ../../../BFTransmitter.framework; sourceTree = "<group>"; };
+		7EA422741FBEB3C300E2426A /* sports.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sports.jpg; path = Assets.xcassets/sports.imageset/sports.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E5BE9951F153AC30065C3CF /* BFTransmitter.framework in Frameworks */,
+				7EA422721FBEAA1300E2426A /* BFTransmitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +68,7 @@
 		3E5BE9761F1538F40065C3CF = {
 			isa = PBXGroup;
 			children = (
-				3E5BE9941F153AC30065C3CF /* BFTransmitter.framework */,
+				7EA422711FBEAA1300E2426A /* BFTransmitter.framework */,
 				3E5BE9811F1538F40065C3CF /* Remote Control */,
 				3E5BE9801F1538F40065C3CF /* Products */,
 			);
@@ -86,6 +88,7 @@
 				3E5BE9821F1538F40065C3CF /* AppDelegate.swift */,
 				3E5BE9861F1538F40065C3CF /* Main.storyboard */,
 				3E5BE9891F1538F40065C3CF /* Assets.xcassets */,
+				7EA422741FBEB3C300E2426A /* sports.jpg */,
 				3E5BE98B1F1538F40065C3CF /* LaunchScreen.storyboard */,
 				3E5BE98E1F1538F40065C3CF /* Info.plist */,
 				3E5BE9981F153D600065C3CF /* MainViewController.swift */,
@@ -108,7 +111,7 @@
 				3E5BE97B1F1538F40065C3CF /* Sources */,
 				3E5BE97C1F1538F40065C3CF /* Frameworks */,
 				3E5BE97D1F1538F40065C3CF /* Resources */,
-				3E5BE9971F153AC30065C3CF /* Embed Frameworks */,
+				7EA422701FBEA9B400E2426A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -131,7 +134,7 @@
 				TargetAttributes = {
 					3E5BE97E1F1538F40065C3CF = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = FMC5MLL736;
+						DevelopmentTeam = 96XBZBC874;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -164,6 +167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EA422751FBEB3C300E2426A /* sports.jpg in Resources */,
 				3E5BE98D1F1538F40065C3CF /* LaunchScreen.storyboard in Resources */,
 				3E5BE98A1F1538F40065C3CF /* Assets.xcassets in Resources */,
 				3E5BE9881F1538F40065C3CF /* Main.storyboard in Resources */,
@@ -309,7 +313,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 96XBZBC874;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -318,7 +322,7 @@
 				INFOPLIST_FILE = "Remote Control/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bridgefy.Remote-Control";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.mesh2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -331,7 +335,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 96XBZBC874;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -340,7 +344,7 @@
 				INFOPLIST_FILE = "Remote Control/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bridgefy.Remote-Control";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.mesh2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
