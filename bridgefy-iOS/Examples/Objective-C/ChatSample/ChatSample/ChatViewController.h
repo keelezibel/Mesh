@@ -17,7 +17,9 @@ extern NSString* const broadcastConversation;
 
 @end
 
-@interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+    
+}
 
 @property (nonatomic, retain) NSString* userUUID;
 @property (nonatomic, retain) NSString *deviceName;
@@ -30,6 +32,7 @@ extern NSString* const broadcastConversation;
 - (void)addMessage:(Message*)message;
 - (void)updateOnlineTo:(BOOL)onlineStatus;
 
+
 //UI controls and actions
 @property (nonatomic, retain) IBOutlet UILabel* onlineLabel;
 @property (nonatomic, retain) IBOutlet UITextField* textField;
@@ -37,6 +40,9 @@ extern NSString* const broadcastConversation;
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
 @property (nonatomic, retain) IBOutlet NSLayoutConstraint* keyboardConstraint;
 
+
 - (IBAction)sendText:(id)sender;
+- (IBAction)accessPhotoLib:(id)sender;
+- (IBAction)accessCamera:(id)sender;
 
 @end

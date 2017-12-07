@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Message : NSObject
 
@@ -18,6 +19,7 @@ typedef NS_ENUM(NSUInteger, DeviceType) {
 
 @property (nonatomic, retain) NSString* sender;
 @property (nonatomic, retain) NSString* text;
+@property (nonatomic, retain) NSData* image;
 @property (nonatomic) BOOL received;
 @property (nonatomic, retain) NSDate* date;
 @property (nonatomic) BOOL mesh;

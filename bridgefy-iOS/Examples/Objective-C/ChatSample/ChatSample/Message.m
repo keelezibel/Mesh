@@ -15,6 +15,7 @@
     if (self = [super init]) {
         self.sender = [decoder decodeObjectForKey:@"sender"];
         self.text = [decoder decodeObjectForKey:@"text"];
+        self.image = [decoder decodeObjectForKey:@"image"];
         self.received = [[decoder decodeObjectForKey:@"received"] boolValue];
         self.date = [decoder decodeObjectForKey:@"date"];
         self.mesh = [[decoder decodeObjectForKey:@"mesh"] boolValue];
@@ -27,6 +28,7 @@
 {
     [encoder encodeObject:self.sender forKey:@"sender"];
     [encoder encodeObject:self.text forKey:@"text"];
+    [encoder encodeObject:self.image forKey:@"image"];
     [encoder encodeObject:@(self.received) forKey:@"received"];
     [encoder encodeObject:self.date forKey:@"date"];
     [encoder encodeObject:@(self.mesh) forKey:@"mesh"];

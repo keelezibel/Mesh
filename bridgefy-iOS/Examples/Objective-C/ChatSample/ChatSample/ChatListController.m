@@ -22,6 +22,7 @@ stringByAppendingPathComponent:(X)]
 NSInteger const onlineSection = 0;
 NSString * const peersFile = @"peersfile";
 NSString * const messageTextKey = @"text";
+NSString * const messageImageKey = @"image";
 NSString * const peerNameKey = @"device_name";
 NSString * const peerTypeKey = @"device_type";
 
@@ -157,6 +158,7 @@ NSString * const peerTypeKey = @"device_type";
     NSError * error;
     NSString * receiverUUID;
     BFSendingOption options;
+    UIImage *image = [UIImage imageWithData:message.image];
     if (message.broadcast)
     {
         //A broadcast message don't have a concrete receiver
@@ -170,11 +172,21 @@ NSString * const peerTypeKey = @"device_type";
         // Creation of the dictionary for the message to be sent
         // We included the device name because is possible that
         // the final receiver doesn't have it.
-        dictionary = @{
-                       messageTextKey: message.text,
-                       peerNameKey: [[UIDevice currentDevice] name],
-                       peerTypeKey: @(DeviceTypeIos)
-                       };
+        if(image == nil) {
+            dictionary = @{
+                           messageTextKey: message.text,
+                           peerNameKey: [[UIDevice currentDevice] name],
+                           peerTypeKey: @(DeviceTypeIos)
+                           };
+        }
+        else {
+            dictionary = @{
+                           messageTextKey: message.text,
+                           messageImageKey: image,
+                           peerNameKey: [[UIDevice currentDevice] name],
+                           peerTypeKey: @(DeviceTypeIos)
+                           };
+        }
     } else
     {
         // The message isn't broadcast, instead is a direct message.
@@ -183,9 +195,17 @@ NSString * const peerTypeKey = @"device_type";
         options = (BFSendingOptionFullTransmission | BFSendingOptionEncrypted);
         
         // Creation of the dictionary for the message to be sent
-        dictionary = @{
-                       messageTextKey: message.text
-                       };
+        if(image == nil) {
+            dictionary = @{
+                           messageTextKey: message.text
+                           };
+        }
+        else {
+            dictionary = @{
+                           messageTextKey: message.text,
+                           messageImageKey: image
+                           };
+        }
     }
     
     [self.transmitter sendDictionary:dictionary
@@ -279,12 +299,20 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
 {
     // A dictionary was received by BFTransmitter.
     if (dictionary[messageTextKey] != nil) {
-        // If it contains a value for the key messageTextKey it's a message
-        [self processReceivedMessage:dictionary
+        // If it contains a value for the key messageTextKey it's a text
+        [self processReceivedTextMessage:dictionary
                             fromUser:user
                                 mesh:mesh
                            broadcast:broadcast];
-    } else {
+    }
+    else if (dictionary[messageImageKey] != nil) {
+        // If it contains a value for the key messageImageKey it's a image
+        [self processReceivedImageMessage:dictionary
+                            fromUser:user
+                                mesh:mesh
+                           broadcast:broadcast];
+    }
+    else {
         //If it doesn't contain the key messageTextKey it's the device name of the other user.
         [self processReceivedPeerInfo:dictionary
                               fromUser:user];
@@ -389,7 +417,7 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
     }
 }
 
-- (void)processReceivedMessage:(NSDictionary *)dictionary
+- (void)processReceivedTextMessage:(NSDictionary *)dictionary
                       fromUser:(NSString *)user
                           mesh:(BOOL)mesh
                      broadcast:(BOOL)broadcast {
@@ -428,6 +456,55 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
     BOOL showingBroadcast = message.broadcast &&
                             self.chatController != nil &&
                             self.chatController.broadcastType;
+    
+    if (showingBroadcast || showingSameUser)
+    {
+        // If the related conversation to the message is being shown.
+        // update messages.
+        [self.chatController addMessage:message];
+    }
+}
+
+- (void)processReceivedImageMessage:(NSDictionary *)dictionary
+                          fromUser:(NSString *)user
+                              mesh:(BOOL)mesh
+                         broadcast:(BOOL)broadcast {
+    // Processing a new message
+    NSData * image = dictionary[messageImageKey];
+    Message * message = [[Message alloc] init];
+    message.text = @"";
+    message.image = image;
+    message.received = YES;
+    message.date = [NSDate date];
+    message.mesh =  mesh;
+    message.broadcast = broadcast;// If YES, received message is broadcast.
+    NSString * conversation;
+    if (message.broadcast)
+    {
+        conversation = broadcastConversation;
+        message.deviceType = (DeviceType)[dictionary[peerTypeKey] intValue];
+        // The deviceName will be processed because it's possible we don't have it yet.
+        [self processReceivedPeerInfo:dictionary
+                             fromUser:user];
+        
+    } else
+    {
+        conversation = user;
+        message.deviceType = DeviceTypeUndefined;
+    }
+    
+    message.sender = [self.peerNamesDictionary[user] objectForKey:@"name"];
+    
+    [self saveMessage:message forConversation:conversation];
+    
+    // YES if the related conversation for the user is shown
+    BOOL showingSameUser = !message.broadcast &&
+    self.chatController &&
+    [self.chatController.userUUID isEqualToString:user];
+    // YES if received message is for broadcast and broadcast is shown
+    BOOL showingBroadcast = message.broadcast &&
+    self.chatController != nil &&
+    self.chatController.broadcastType;
     
     if (showingBroadcast || showingSameUser)
     {
