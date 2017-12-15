@@ -39,4 +39,13 @@ self.transmitter = BFTransmitter(apiKey: "API KEY")
 ```
 
 ## Bundle identifier
-com.test.mesh2
+com.test.mesh3
+
+## Note about Bridgefy
+Broadcast messages are restricted to be sent using mesh network, so can't send binary file using broadcast mode. Possible to add into dictionary but will be rejected if h3
+
+## Note about Bridgefy
+- Broadcast messages are restricted to be sent using mesh network, so can't send binary file using broadcast mode. Possible to add into dictionary but will be rejected if >2048 bytes.
+- Image data can be sent using 'withData:' argument.
+- Binary files restricted to enter mesh network so as not to affect performance of mesh network.
+- iOS framework uses Wifi Peer-to-Peer and BLE. Connection between iOS devices use Wifi Peer-to-Peer and can go up to 2Mbps. Connection between iOS and Android will be using BLE at most 45kbps. Size of binary file is restricted to 120kb in BLE.
