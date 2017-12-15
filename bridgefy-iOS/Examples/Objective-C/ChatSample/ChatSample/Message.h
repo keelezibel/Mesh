@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, DeviceType) {
 
 @property (nonatomic, retain) NSString* sender;
 @property (nonatomic, retain) NSString* text;
-@property (nonatomic, retain) NSData* image;
+@property (nonatomic, retain) NSData* imageData;
 @property (nonatomic) BOOL received;
 @property (nonatomic, retain) NSDate* date;
 @property (nonatomic) BOOL mesh;

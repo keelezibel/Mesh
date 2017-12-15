@@ -22,7 +22,6 @@ stringByAppendingPathComponent:(X)]
 NSInteger const onlineSection = 0;
 NSString * const peersFile = @"peersfile";
 NSString * const messageTextKey = @"text";
-NSString * const messageImageKey = @"image";
 NSString * const peerNameKey = @"device_name";
 NSString * const peerTypeKey = @"device_type";
 
@@ -52,7 +51,7 @@ NSString * const peerTypeKey = @"device_type";
     
     //Transmitter initialization
     [BFTransmitter setLogLevel:BFLogLevelTrace];
-    self.transmitter = [[BFTransmitter alloc] initWithApiKey:@"9c0d240e-5cda-4290-87c9-336ac93069fa"];
+    self.transmitter = [[BFTransmitter alloc] initWithApiKey:@"f0046445-983b-4c01-93e9-cdf33b51179b"];
     self.transmitter.delegate = self;
     self.transmitter.backgroundModeEnabled = YES;
     [self.transmitter start];
@@ -154,11 +153,12 @@ NSString * const peerTypeKey = @"device_type";
 #pragma mark - 4
 -(void)sendMessage:(Message *)message toConversation:(NSString *)uuid
 {
-    NSDictionary * dictionary;
+    
     NSError * error;
     NSString * receiverUUID;
     BFSendingOption options;
-    UIImage *image = [UIImage imageWithData:message.image];
+    NSDictionary * dictionary; // Will store the dictionary to send, if any
+    NSData * binaryData; // Will store the binary data (image) to send, if any
     if (message.broadcast)
     {
         //A broadcast message don't have a concrete receiver
@@ -172,7 +172,7 @@ NSString * const peerTypeKey = @"device_type";
         // Creation of the dictionary for the message to be sent
         // We included the device name because is possible that
         // the final receiver doesn't have it.
-        if(image == nil) {
+        if(message.imageData == nil) {
             dictionary = @{
                            messageTextKey: message.text,
                            peerNameKey: [[UIDevice currentDevice] name],
@@ -180,9 +180,10 @@ NSString * const peerTypeKey = @"device_type";
                            };
         }
         else {
+            // WARNING: This won't work, broadcast messages can't contain binary parts,
+            //           so the image data will be discarded.
+            binaryData = message.imageData;
             dictionary = @{
-                           messageTextKey: message.text,
-                           messageImageKey: image,
                            peerNameKey: [[UIDevice currentDevice] name],
                            peerTypeKey: @(DeviceTypeIos)
                            };
@@ -192,23 +193,21 @@ NSString * const peerTypeKey = @"device_type";
         // The message isn't broadcast, instead is a direct message.
         // A direct message can be encrypted.
         receiverUUID = uuid;
-        options = (BFSendingOptionFullTransmission | BFSendingOptionEncrypted);
+        options = (BFSendingOptionDirectTransmission | BFSendingOptionEncrypted);
         
         // Creation of the dictionary for the message to be sent
-        if(image == nil) {
+        if(message.imageData == nil) {
             dictionary = @{
                            messageTextKey: message.text
                            };
         }
         else {
-            dictionary = @{
-                           messageTextKey: message.text,
-                           messageImageKey: image
-                           };
+            binaryData = message.imageData;
         }
     }
     
     [self.transmitter sendDictionary:dictionary
+                            withData:binaryData
                               toUser:receiverUUID
                              options:options
                                error:&error];
@@ -276,7 +275,8 @@ NSString * const peerTypeKey = @"device_type";
 
 - (void)transmitter:(BFTransmitter *)transmitter didFailForPacket:(NSString *)packetID error:(NSError * _Nullable)error
 {
-    //A direct message transmission failed.
+    NSLog(@"Error: Packet with id %@ failed.", packetID);
+    NSLog(@"Error description: %@", error.localizedDescription);
 }
 - (void)transmitter:(BFTransmitter *)transmitter meshDidDiscardPackets:(NSArray<NSString *> *)packetIDs
 {
@@ -297,23 +297,27 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
           broadcast:(BOOL)broadcast
                mesh:(BOOL)mesh
 {
+    NSLog(@"Received chat dictionary %@", dictionary);
     // A dictionary was received by BFTransmitter.
     if (dictionary[messageTextKey] != nil) {
         // If it contains a value for the key messageTextKey it's a text
+        NSLog(@"Chat: Text message received");
         [self processReceivedTextMessage:dictionary
                             fromUser:user
                                 mesh:mesh
                            broadcast:broadcast];
     }
-    else if (dictionary[messageImageKey] != nil) {
-        // If it contains a value for the key messageImageKey it's a image
-        [self processReceivedImageMessage:dictionary
-                            fromUser:user
-                                mesh:mesh
-                           broadcast:broadcast];
-    }
-    else {
+    else if (data != nil) {
+        // If it contains a value for the key messageImageKey it's an image
+        NSLog(@"Chat: Image message received (size: %lu)", (unsigned long)data.length);
+        [self processReceivedImageMessageWithDictionary:dictionary
+                                                   data:data
+                                               fromUser:user
+                                                   mesh:mesh
+                                              broadcast:broadcast];
+    } else {
         //If it doesn't contain the key messageTextKey it's the device name of the other user.
+        NSLog(@"Chat: Peer general information received");
         [self processReceivedPeerInfo:dictionary
                               fromUser:user];
     }
@@ -465,15 +469,15 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
     }
 }
 
-- (void)processReceivedImageMessage:(NSDictionary *)dictionary
-                          fromUser:(NSString *)user
-                              mesh:(BOOL)mesh
-                         broadcast:(BOOL)broadcast {
+- (void)processReceivedImageMessageWithDictionary:(NSDictionary *)dictionary
+                                             data:(NSData *)imageData
+                                         fromUser:(NSString *)user
+                                             mesh:(BOOL)mesh
+                                        broadcast:(BOOL)broadcast {
     // Processing a new message
-    NSData * image = dictionary[messageImageKey];
     Message * message = [[Message alloc] init];
     message.text = @"";
-    message.image = image;
+    message.imageData = imageData;
     message.received = YES;
     message.date = [NSDate date];
     message.mesh =  mesh;

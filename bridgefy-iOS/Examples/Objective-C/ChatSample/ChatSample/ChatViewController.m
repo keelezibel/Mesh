@@ -77,7 +77,7 @@ NSString* const broadcastConversation = @"broadcast";
     }
     Message* message = [[Message alloc] init];
     message.text = self.textField.text;
-    message.image = NULL;
+    message.imageData = NULL;
     message.date = [NSDate date];
     message.received = NO;
     message.broadcast = self.broadcastType;
@@ -102,21 +102,19 @@ NSString* const broadcastConversation = @"broadcast";
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
     
     picker.delegate = self;
-    picker.allowsEditing = YES;
+    picker.allowsEditing = NO;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{   
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
+{
     Message* message = [[Message alloc] init];
     message.text = @"";
-    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
     NSData *webData = UIImagePNGRepresentation(image);
-    message.image = webData;
+    message.imageData = webData;
     message.date = [NSDate date];
     message.received = NO;
     message.broadcast = self.broadcastType;
@@ -134,6 +132,7 @@ NSString* const broadcastConversation = @"broadcast";
     self.textField.text = @"";
     [self.messages insertObject:message atIndex:0];
     [self addRowToTable];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)accessCamera:(id)sender
@@ -141,7 +140,7 @@ NSString* const broadcastConversation = @"broadcast";
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
     
     picker.delegate = self;
-    picker.allowsEditing = YES;
+    picker.allowsEditing = NO;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
     [self presentViewController:picker animated:YES completion:NULL];
@@ -178,10 +177,6 @@ NSString* const broadcastConversation = @"broadcast";
         transmissionLabel.textColor = message.mesh ? [UIColor blueColor] : [UIColor redColor];
         transmissionLabel.text = message.mesh ? @"MESH" : @"DIRECT";
         
-        UIImage *imageRec = [UIImage imageWithData:message.image];
-        NSLog(@"Received Image");
-        NSLog(@"%@",imageRec);
-        
         switch (message.deviceType) {
             case DeviceTypeUndefined:
                 deviceTypeImageView.image = nil;
@@ -201,8 +196,10 @@ NSString* const broadcastConversation = @"broadcast";
         deviceTypeImageView.image = nil;
     }
     messageLabel.text = message.text;
-    UIImage *image = [UIImage imageWithData:message.image];
+    UIImage *image = [UIImage imageWithData:message.imageData];
     cell.imageView.image = image;
+    cell.imageView.userInteractionEnabled = YES;
+
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm:ss"];
     dateLabel.text = [dateFormatter stringFromDate:message.date];

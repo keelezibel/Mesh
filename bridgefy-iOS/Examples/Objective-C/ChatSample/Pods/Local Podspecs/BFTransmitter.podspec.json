@@ -1,0 +1,53 @@
+{
+  "name": "BFTransmitter",
+  "version": "1.0",
+  "summary": "Offline engine for messaging.",
+  "description": "A longer description of Bridgefy in Markdown format.",
+  "homepage": "http://bridgefy.me/",
+  "license": "MIT",
+  "authors": {
+    "Bridgefy": "danno@mistercyb.org"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": [
+    "BFTransmitter",
+    "BFTransmitter/*.{h,m}"
+  ],
+  "source": {
+    "path": "."
+  },
+  "public_header_files": "BFTransmitter/*.h",
+  "frameworks": "CoreBluetooth",
+  "requires_arc": true,
+  "libraries": "z",
+  "dependencies": {
+    "GZIP": [
+
+    ],
+    "PDKeychainBindingsController": [
+
+    ],
+    "MPMessagePack": [
+
+    ],
+    "AFNetworking": [
+
+    ]
+  },
+  "exclude_files": [
+    "BFTransmitter/CryptoUtil.{h,m}",
+    "BFTransmitter/KeychainUtil.{h,m}"
+  ],
+  "subspecs": [
+    {
+      "name": "no-arc",
+      "requires_arc": false,
+      "source_files": [
+        "BFTransmitter/CryptoUtil.{h,m}",
+        "BFTransmitter/KeychainUtil.{h,m}"
+      ]
+    }
+  ]
+}
