@@ -49,3 +49,8 @@ Broadcast messages are restricted to be sent using mesh network, so can't send b
 - Image data can be sent using 'withData:' argument.
 - Binary files restricted to enter mesh network so as not to affect performance of mesh network.
 - iOS framework uses Wifi Peer-to-Peer and BLE. Connection between iOS devices use Wifi Peer-to-Peer and can go up to 2Mbps. Connection between iOS and Android will be using BLE at most 45kbps. Size of binary file is restricted to 120kb in BLE.
+
+## Remove large file in case committed wrongly
+```
+git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch <file/dir>' HEAD
+```
