@@ -8,6 +8,7 @@
 
 #import "Message.h"
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 extern NSString* const broadcastConversation;
 
@@ -17,8 +18,8 @@ extern NSString* const broadcastConversation;
 
 @end
 
-@interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
-    
+@interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate> {
+    CLLocationManager *locationManager;
 }
 
 @property (nonatomic, retain) NSString* userUUID;

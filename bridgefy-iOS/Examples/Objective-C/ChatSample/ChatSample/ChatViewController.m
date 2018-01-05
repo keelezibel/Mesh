@@ -34,6 +34,8 @@ NSString* const broadcastConversation = @"broadcast";
                                              selector:@selector(keyboardHidden:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
+    // Init locationManager
+    locationManager = [[CLLocationManager alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -95,6 +97,38 @@ NSString* const broadcastConversation = @"broadcast";
     self.textField.text = @"";
     [self.messages insertObject:message atIndex:0];
     [self addRowToTable];
+}
+
+- (IBAction)sendGPSLocation:(id)sender
+{
+    locationManager.delegate = self;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [locationManager requestWhenInUseAuthorization];
+    }
+    [locationManager startUpdatingLocation];
+}
+
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"didUpdateToLocation: %@", newLocation);
+    CLLocation *currentLocation = newLocation;
+    
+    if (currentLocation != nil) {
+        self.textField.text = [NSString stringWithFormat:@"%.8f, %.8f", currentLocation.coordinate.latitude,currentLocation.coordinate.longitude];
+    }
 }
 
 - (IBAction)accessPhotoLib:(id)sender
