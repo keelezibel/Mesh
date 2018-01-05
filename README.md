@@ -54,3 +54,7 @@ Broadcast messages are restricted to be sent using mesh network, so can't send b
 ```
 git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch <file/dir>' HEAD
 ```
+
+## CartoDB
+URL: https://keelezibel.carto.com/me
+Mobile SDK guide: https://carto.com/docs/carto-engine/mobile-sdk/getting-started/
