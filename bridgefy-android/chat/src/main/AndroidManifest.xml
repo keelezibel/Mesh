@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.test.mesh2">
+    package="com.test.mesh3">
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
-
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 `
     <application
@@ -20,7 +20,7 @@
 
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.test.mesh3.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
@@ -39,16 +39,16 @@
         </activity>
 
         <activity
-            android:name=".ChatActivity"
-            android:parentActivityName=".MainActivity">
+            android:name="com.test.mesh3.ChatActivity"
+            android:parentActivityName="com.test.mesh3.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.test.mesh2.MainActivity" />
+                android:value="com.test.mesh3.MainActivity" />
         </activity>
 
         <!-- Bridgefy SDK key -->
         <meta-data
             android:name="com.bridgefy.sdk.API_KEY"
-            android:value="9c0d240e-5cda-4290-87c9-336ac93069fa" />
+            android:value="f0046445-983b-4c01-93e9-cdf33b51179b" />
     </application>
 </manifest>

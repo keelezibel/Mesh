@@ -1,4 +1,4 @@
-package com.test.mesh2.entities;
+package com.test.mesh3.entities;
 
 import com.google.gson.Gson;
 

@@ -1,4 +1,4 @@
-package com.test.mesh2;
+package com.test.mesh3;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
@@ -21,8 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Bitmap;
 
-import com.test.mesh2.entities.Peer;
+import com.test.mesh3.entities.Peer;
 import com.bridgefy.sdk.client.Bridgefy;
 import com.bridgefy.sdk.client.BridgefyClient;
 import com.bridgefy.sdk.client.Device;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     static final String INTENT_EXTRA_UUID = "peerUuid";
     static final String INTENT_EXTRA_TYPE = "deviceType";
     static final String INTENT_EXTRA_MSG  = "message";
+    static final String INTENT_EXTRA_IMG  = "imgMessage";
     static final String BROADCAST_CHAT    = "Broadcast";
 
     PeersRecyclerViewAdapter peersAdapter =
@@ -143,10 +145,12 @@ public class MainActivity extends AppCompatActivity {
 
             // any other direct message should be treated as such
             } else {
-                String incomingMessage = (String) message.getContent().get("text");
+                String incomingTextMessage = (String) message.getContent().get("text");
+                Bitmap incomingImgMessage = (Bitmap) message.getContent().get("image");
                 LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(
                         new Intent(message.getSenderId())
-                                .putExtra(INTENT_EXTRA_MSG, incomingMessage));
+                                .putExtra(INTENT_EXTRA_MSG, incomingTextMessage)
+                                .putExtra(INTENT_EXTRA_IMG, incomingImgMessage));
             }
 
             if (isThingsDevice(MainActivity.this)) {

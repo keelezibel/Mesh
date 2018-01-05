@@ -1,6 +1,9 @@
-package com.test.mesh2.entities;
+package com.test.mesh3.entities;
+
+import android.graphics.BitmapFactory;
 
 import com.google.gson.Gson;
+import android.graphics.Bitmap;
 
 /**
  * @author dekaru on 5/9/17.
@@ -14,11 +17,12 @@ public class Message {
     private int    direction;
     private String deviceName;
     private String text;
+    private byte[] image;
 
-    public Message(String text) {
+    public Message(String text, byte[] image) {
         this.text = text;
+        this.image = image;
     }
-
 
     public int getDirection() {
         return direction;
@@ -34,6 +38,10 @@ public class Message {
 
     public String getText() {
         return text;
+    }
+
+    public byte[] getImage() {
+        return image;
     }
 
     public void setDeviceName(String deviceName) {
