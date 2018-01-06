@@ -56,5 +56,5 @@ git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch <file/dir>
 ```
 
 ## CartoDB
-URL: https://keelezibel.carto.com/me
-Mobile SDK guide: https://carto.com/docs/carto-engine/mobile-sdk/getting-started/
+- URL: https://keelezibel.carto.com/me
+- Mobile SDK guide: https://carto.com/docs/carto-engine/mobile-sdk/getting-started/
