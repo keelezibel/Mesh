@@ -42,9 +42,6 @@ self.transmitter = BFTransmitter(apiKey: "API KEY")
 com.test.mesh3
 
 ## Note about Bridgefy
-Broadcast messages are restricted to be sent using mesh network, so can't send binary file using broadcast mode. Possible to add into dictionary but will be rejected if h3
-
-## Note about Bridgefy
 - Broadcast messages are restricted to be sent using mesh network, so can't send binary file using broadcast mode. Possible to add into dictionary but will be rejected if >2048 bytes.
 - Image data can be sent using 'withData:' argument.
 - Binary files restricted to enter mesh network so as not to affect performance of mesh network.
