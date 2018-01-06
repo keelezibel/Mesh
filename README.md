@@ -51,6 +51,16 @@ com.test.mesh3
 ```
 git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch <file/dir>' HEAD
 ```
+OR
+```
+git rm --cached path/to/your/big/file
+git commit --amend -CHEAD
+git push
+```
+## Find large files and add to .gitignore
+```
+find . -size +1G | cat >> .gitignore
+```
 
 ## CartoDB
 - URL: https://keelezibel.carto.com/me
