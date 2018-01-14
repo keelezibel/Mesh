@@ -26,6 +26,10 @@
 	<string>Usage for sample purposes.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Usage for sample purposes.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Usage for sample purposes.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Usage for sample purposes.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Usage for sample purposes.</string>
 	<key>UIBackgroundModes</key>
@@ -37,14 +41,10 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Usage for sample purposes.</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Usage for sample purposes.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

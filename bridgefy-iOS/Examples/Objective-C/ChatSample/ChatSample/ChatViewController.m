@@ -142,11 +142,30 @@ NSString* const broadcastConversation = @"broadcast";
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
+- (UIImage*)resizeImageWithImage:(UIImage*)image toSize:(CGSize)newSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    
+    // draw in new context, with the new size
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     Message* message = [[Message alloc] init];
     message.text = @"";
     UIImage *image = info[UIImagePickerControllerOriginalImage];
+    image = [self resizeImageWithImage:image toSize:CGSizeMake(320, 480)];
+    
     NSData *webData = UIImagePNGRepresentation(image);
     message.imageData = webData;
     message.date = [NSDate date];

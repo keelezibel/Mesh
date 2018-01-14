@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.graphics.Bitmap;
+import android.util.Base64;
 
 import com.test.mesh3.entities.Peer;
 import com.bridgefy.sdk.client.Bridgefy;
@@ -146,11 +147,19 @@ public class MainActivity extends AppCompatActivity {
             // any other direct message should be treated as such
             } else {
                 String incomingTextMessage = (String) message.getContent().get("text");
-                Bitmap incomingImgMessage = (Bitmap) message.getContent().get("image");
-                LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(
-                        new Intent(message.getSenderId())
-                                .putExtra(INTENT_EXTRA_MSG, incomingTextMessage)
-                                .putExtra(INTENT_EXTRA_IMG, incomingImgMessage));
+                if(message.getData() != null) {
+                    byte[] incomingImgMessage = Base64.decode(message.getData(), 0);
+                    //byte[] incomingImgMessage = message.getData();
+                    LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(
+                            new Intent(message.getSenderId())
+                                    .putExtra(INTENT_EXTRA_MSG, incomingTextMessage)
+                                    .putExtra(INTENT_EXTRA_IMG, incomingImgMessage));
+                }
+                else {
+                    LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(
+                            new Intent(message.getSenderId())
+                                    .putExtra(INTENT_EXTRA_MSG, incomingTextMessage));
+                }
             }
 
             if (isThingsDevice(MainActivity.this)) {

@@ -33,9 +33,18 @@ $ open ./platforms/ios/MyApp.xcworkspace/
 ```
 
 # Bridgefy
-## Change API key for Bridgefy
+## Change API key for Bridgefy iOS (ChatListController.m)
 ```swift
 self.transmitter = BFTransmitter(apiKey: "API KEY")
+```
+
+## Change API key for Bridgefy Android (AndroidManifest.xml)
+```
+android:value="" />
+```
+## Change application bundle id (build.gradle)
+```
+defaultConfig { ... applicationId "com.test.mesh3" ... }
 ```
 
 ## Bundle identifier

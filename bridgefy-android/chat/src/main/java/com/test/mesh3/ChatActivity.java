@@ -34,6 +34,7 @@ import com.test.mesh3.entities.Peer;
 import com.bridgefy.sdk.client.BFEngineProfile;
 import com.bridgefy.sdk.client.Bridgefy;
 
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +45,7 @@ import java.text.SimpleDateFormat;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,7 +96,7 @@ public class ChatActivity extends AppCompatActivity {
                 .registerReceiver(new BroadcastReceiver() {
                     @Override
                     public void onReceive(Context context, Intent intent) {
-                        Message message = new Message(intent.getStringExtra(MainActivity.INTENT_EXTRA_MSG),null);
+                        Message message = new Message(intent.getStringExtra(MainActivity.INTENT_EXTRA_MSG),intent.getByteArrayExtra(MainActivity.INTENT_EXTRA_IMG));
                         message.setDeviceName(intent.getStringExtra(MainActivity.INTENT_EXTRA_NAME));
                         message.setDirection(Message.INCOMING_MESSAGE);
                         messagesAdapter.addMessage(message);
@@ -180,6 +182,22 @@ public class ChatActivity extends AppCompatActivity {
                         Message message = new Message("", arr);
                         message.setDirection(Message.OUTGOING_MESSAGE);
                         messagesAdapter.addMessage(message);
+
+                        // create a HashMap object to send
+                        HashMap<String, Object> content = new HashMap<>();
+                        content.put("text", null);
+
+                        // send message text to device
+                        if (conversationId.equals(BROADCAST_CHAT)) {
+
+                        } else {
+                            com.bridgefy.sdk.client.Message.Builder builder=new com.bridgefy.sdk.client.Message.Builder();
+                            //builder.setContent(content).setReceiverId(conversationId);
+                            builder.setData(arr).setReceiverId(conversationId);
+
+                            Bridgefy.sendMessage(builder.build(),
+                                    BFEngineProfile.BFConfigProfileLongReach);
+                        }
                     }
                     catch (FileNotFoundException e){
                         throw new RuntimeException(e);
@@ -198,6 +216,23 @@ public class ChatActivity extends AppCompatActivity {
                     Message message = new Message("", arr);
                     message.setDirection(Message.OUTGOING_MESSAGE);
                     messagesAdapter.addMessage(message);
+
+                    // create a HashMap object to send
+                    HashMap<String, Object> content = new HashMap<>();
+                    content.put("text", "");
+
+                    // send message text to device
+                    if (conversationId.equals(BROADCAST_CHAT)) {
+
+                    } else {
+                        com.bridgefy.sdk.client.Message.Builder builder=new com.bridgefy.sdk.client.Message.Builder();
+                        //builder.setContent(content).setReceiverId(conversationId);
+                        builder.setData(arr).setReceiverId(conversationId);
+
+                        Bridgefy.sendMessage(builder.build(),
+                                BFEngineProfile.BFConfigProfileLongReach);
+                    }
+
                 }
                 return;
         }
@@ -241,7 +276,7 @@ public class ChatActivity extends AppCompatActivity {
         Uri uri = inUri;
         InputStream in = inStream;
         try {
-            final int IMAGE_MAX_SIZE = 1200000; // 1.2MP
+            final int IMAGE_MAX_SIZE = 12000; // 1.2MP
             in = getContentResolver().openInputStream(uri);
 
             // Decode image size

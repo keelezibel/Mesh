@@ -51,7 +51,7 @@ NSString * const peerTypeKey = @"device_type";
     
     //Transmitter initialization
     [BFTransmitter setLogLevel:BFLogLevelTrace];
-    self.transmitter = [[BFTransmitter alloc] initWithApiKey:@"f0046445-983b-4c01-93e9-cdf33b51179b"];
+    self.transmitter = [[BFTransmitter alloc] initWithApiKey:@"1f8fa26d-bc33-4340-8b07-ee3e5d75bec7"];
     self.transmitter.delegate = self;
     self.transmitter.backgroundModeEnabled = YES;
     [self.transmitter start];
@@ -298,6 +298,8 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
                mesh:(BOOL)mesh
 {
     NSLog(@"Received chat dictionary %@", dictionary);
+    NSLog(@"Received data %@", data);
+    
     // A dictionary was received by BFTransmitter.
     if (dictionary[messageTextKey] != nil) {
         // If it contains a value for the key messageTextKey it's a text
@@ -474,6 +476,7 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
                                          fromUser:(NSString *)user
                                              mesh:(BOOL)mesh
                                         broadcast:(BOOL)broadcast {
+    
     // Processing a new message
     Message * message = [[Message alloc] init];
     message.text = @"";
