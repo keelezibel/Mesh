@@ -37,6 +37,7 @@ import com.bridgefy.sdk.client.Bridgefy;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
@@ -276,7 +277,7 @@ public class ChatActivity extends AppCompatActivity {
         Uri uri = inUri;
         InputStream in = inStream;
         try {
-            final int IMAGE_MAX_SIZE = 12000; // 1.2MP
+            final int IMAGE_MAX_SIZE = 8000; // 1.2MP
             in = getContentResolver().openInputStream(uri);
 
             // Decode image size

@@ -298,7 +298,6 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
                mesh:(BOOL)mesh
 {
     NSLog(@"Received chat dictionary %@", dictionary);
-    NSLog(@"Received data %@", data);
     
     // A dictionary was received by BFTransmitter.
     if (dictionary[messageTextKey] != nil) {
@@ -480,7 +479,18 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
     // Processing a new message
     Message * message = [[Message alloc] init];
     message.text = @"";
-    message.imageData = imageData;
+    // Check device type
+    NSDictionary *peerInfo = self.peerNamesDictionary[user];
+    DeviceType msgDevice = (DeviceType)[peerInfo[@"type"] intValue];
+    if(msgDevice == DeviceTypeAndroid){
+        NSData * newImgData = [imageData subdataWithRange:NSMakeRange(15, imageData.length-15-8)];
+        message.imageData = newImgData;
+    }
+    else {
+        message.imageData = imageData;
+    }
+    NSLog(@"Received data %@", message.imageData);
+    
     message.received = YES;
     message.date = [NSDate date];
     message.mesh =  mesh;
