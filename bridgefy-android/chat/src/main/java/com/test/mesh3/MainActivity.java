@@ -149,6 +149,10 @@ public class MainActivity extends AppCompatActivity {
                 String incomingTextMessage = (String) message.getContent().get("text");
                 if(message.getData() != null) {
                     byte[] incomingImgMessage = Base64.decode(message.getData(), 0);
+                    for(byte b : incomingImgMessage){
+                        Log.i("myactivity", String.format("0x%20x", b));
+                    }
+
                     //byte[] incomingImgMessage = message.getData();
                     LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(
                             new Intent(message.getSenderId())

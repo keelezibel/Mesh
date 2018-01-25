@@ -164,9 +164,10 @@ NSString* const broadcastConversation = @"broadcast";
     Message* message = [[Message alloc] init];
     message.text = @"";
     UIImage *image = info[UIImagePickerControllerOriginalImage];
-    image = [self resizeImageWithImage:image toSize:CGSizeMake(320, 480)];
+    image = [self resizeImageWithImage:image toSize:CGSizeMake(100, 100)];
     
     NSData *webData = UIImagePNGRepresentation(image);
+    NSLog(@"Sent data %@", webData);
     message.imageData = webData;
     message.date = [NSDate date];
     message.received = NO;
