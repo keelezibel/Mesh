@@ -10,11 +10,11 @@
 		5114B1401D3D975E002D339B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B13F1D3D975E002D339B /* main.m */; };
 		5114B1431D3D975E002D339B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1421D3D975E002D339B /* AppDelegate.m */; };
 		5114B1491D3D975E002D339B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5114B1471D3D975E002D339B /* Main.storyboard */; };
-		5114B14B1D3D975E002D339B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5114B14A1D3D975E002D339B /* Assets.xcassets */; };
 		5114B14E1D3D975E002D339B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5114B14C1D3D975E002D339B /* LaunchScreen.storyboard */; };
 		5114B1711D3DAF2B002D339B /* ChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1701D3DAF2B002D339B /* ChatListController.m */; };
 		5114B1741D3DB7EA002D339B /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1731D3DB7EA002D339B /* ChatViewController.m */; };
 		5114B1771D3ED4F4002D339B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1761D3ED4F4002D339B /* Message.m */; };
+		7E8D3598201B1A3D0015851C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E8D3597201B1A3D0015851C /* Assets.xcassets */; };
 		887973158E9D47EC0F47266D /* libPods-ChatSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7C73E0FA3AD98AD277E8A2 /* libPods-ChatSample.a */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +38,6 @@
 		5114B1411D3D975E002D339B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5114B1421D3D975E002D339B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5114B1481D3D975E002D339B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5114B14A1D3D975E002D339B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5114B14D1D3D975E002D339B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5114B14F1D3D975E002D339B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5114B16F1D3DAF2B002D339B /* ChatListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListController.h; sourceTree = "<group>"; };
@@ -47,6 +46,7 @@
 		5114B1731D3DB7EA002D339B /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		5114B1751D3ED4F4002D339B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		5114B1761D3ED4F4002D339B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		7E8D3597201B1A3D0015851C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		801B08660A63D406584BBDCE /* Pods-ChatSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample.release.xcconfig"; sourceTree = "<group>"; };
 		8613FF8DA5AB6F0C36D2D42E /* Pods-ChatSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,8 +87,8 @@
 				5114B1411D3D975E002D339B /* AppDelegate.h */,
 				5114B1421D3D975E002D339B /* AppDelegate.m */,
 				5114B1471D3D975E002D339B /* Main.storyboard */,
-				5114B14A1D3D975E002D339B /* Assets.xcassets */,
 				5114B14C1D3D975E002D339B /* LaunchScreen.storyboard */,
+				7E8D3597201B1A3D0015851C /* Assets.xcassets */,
 				5114B14F1D3D975E002D339B /* Info.plist */,
 				5114B13E1D3D975E002D339B /* Supporting Files */,
 				5114B16F1D3DAF2B002D339B /* ChatListController.h */,
@@ -190,7 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5114B14E1D3D975E002D339B /* LaunchScreen.storyboard in Resources */,
-				5114B14B1D3D975E002D339B /* Assets.xcassets in Resources */,
+				7E8D3598201B1A3D0015851C /* Assets.xcassets in Resources */,
 				5114B1491D3D975E002D339B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,12 +388,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8613FF8DA5AB6F0C36D2D42E /* Pods-ChatSample.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Appicon-1";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 96XBZBC874;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ChatSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.mesh3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -406,12 +406,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 801B08660A63D406584BBDCE /* Pods-ChatSample.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Appicon-1";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 96XBZBC874;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ChatSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.mesh3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
