@@ -14,6 +14,8 @@
 		5114B1711D3DAF2B002D339B /* ChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1701D3DAF2B002D339B /* ChatListController.m */; };
 		5114B1741D3DB7EA002D339B /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1731D3DB7EA002D339B /* ChatViewController.m */; };
 		5114B1771D3ED4F4002D339B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1761D3ED4F4002D339B /* Message.m */; };
+		7E58EC95201D758E001FECCB /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E58EC94201D758E001FECCB /* MapController.m */; };
+		7E58EC97201D9812001FECCB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E58EC96201D9812001FECCB /* MapKit.framework */; };
 		7E8D3598201B1A3D0015851C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E8D3597201B1A3D0015851C /* Assets.xcassets */; };
 		887973158E9D47EC0F47266D /* libPods-ChatSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7C73E0FA3AD98AD277E8A2 /* libPods-ChatSample.a */; };
 /* End PBXBuildFile section */
@@ -46,6 +48,9 @@
 		5114B1731D3DB7EA002D339B /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		5114B1751D3ED4F4002D339B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		5114B1761D3ED4F4002D339B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		7E58EC93201D7455001FECCB /* MapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
+		7E58EC94201D758E001FECCB /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
+		7E58EC96201D9812001FECCB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7E8D3597201B1A3D0015851C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		801B08660A63D406584BBDCE /* Pods-ChatSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample.release.xcconfig"; sourceTree = "<group>"; };
 		8613FF8DA5AB6F0C36D2D42E /* Pods-ChatSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -56,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E58EC97201D9812001FECCB /* MapKit.framework in Frameworks */,
 				887973158E9D47EC0F47266D /* libPods-ChatSample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +97,8 @@
 				7E8D3597201B1A3D0015851C /* Assets.xcassets */,
 				5114B14F1D3D975E002D339B /* Info.plist */,
 				5114B13E1D3D975E002D339B /* Supporting Files */,
+				7E58EC93201D7455001FECCB /* MapController.h */,
+				7E58EC94201D758E001FECCB /* MapController.m */,
 				5114B16F1D3DAF2B002D339B /* ChatListController.h */,
 				5114B1701D3DAF2B002D339B /* ChatListController.m */,
 				5114B1721D3DB7EA002D339B /* ChatViewController.h */,
@@ -112,6 +120,7 @@
 		BAAA709C0DBC29D12FED48DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E58EC96201D9812001FECCB /* MapKit.framework */,
 				4D7C73E0FA3AD98AD277E8A2 /* libPods-ChatSample.a */,
 			);
 			name = Frameworks;
@@ -260,6 +269,7 @@
 				5114B1401D3D975E002D339B /* main.m in Sources */,
 				5114B1771D3ED4F4002D339B /* Message.m in Sources */,
 				5114B1741D3DB7EA002D339B /* ChatViewController.m in Sources */,
+				7E58EC95201D758E001FECCB /* MapController.m in Sources */,
 				5114B1711D3DAF2B002D339B /* ChatListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

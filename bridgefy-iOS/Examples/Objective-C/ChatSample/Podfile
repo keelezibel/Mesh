@@ -1,6 +1,6 @@
 platform :ios, '8.0'
 
 target 'ChatSample' do
-    pod 'BFTransmitter', '0.1.25.1'
+    pod 'BFTransmitter'
 end
 

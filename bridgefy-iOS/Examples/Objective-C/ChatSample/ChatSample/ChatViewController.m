@@ -7,6 +7,7 @@
 //
 
 #import "ChatViewController.h"
+#import "MapController.h"
 
 NSString* const broadcastConversation = @"broadcast";
 
@@ -26,6 +27,7 @@ NSString* const broadcastConversation = @"broadcast";
     else {
         self.navigationItem.title = self.deviceName;
     }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardShown:)
                                                  name:UIKeyboardDidShowNotification
@@ -35,7 +37,8 @@ NSString* const broadcastConversation = @"broadcast";
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
     // Init locationManager
-    locationManager = [[CLLocationManager alloc] init];
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -101,14 +104,13 @@ NSString* const broadcastConversation = @"broadcast";
 
 - (IBAction)sendGPSLocation:(id)sender
 {
-    locationManager.delegate = self;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.distanceFilter = kCLDistanceFilterNone;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [locationManager requestWhenInUseAuthorization];
+    if ([_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [_locationManager requestWhenInUseAuthorization];
     }
-    [locationManager startUpdatingLocation];
+    [_locationManager startUpdatingLocation];
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -129,6 +131,7 @@ NSString* const broadcastConversation = @"broadcast";
     if (currentLocation != nil) {
         self.textField.text = [NSString stringWithFormat:@"%.8f, %.8f", currentLocation.coordinate.latitude,currentLocation.coordinate.longitude];
     }
+    [_locationManager stopUpdatingLocation];
 }
 
 - (IBAction)accessPhotoLib:(id)sender

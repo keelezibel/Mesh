@@ -21,18 +21,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Launch Screen" translatesAutoresizingMaskIntoConstraints="NO" id="D8O-Hs-Ewe">
-                                <rect key="frame" x="-9" y="-8" width="396" height="675"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Screen" translatesAutoresizingMaskIntoConstraints="NO" id="nP1-47-IhR">
+                                <rect key="frame" x="-12" y="-12" width="397" height="688"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="D8O-Hs-Ewe" secondAttribute="bottom" id="3vt-B9-VHN"/>
-                            <constraint firstAttribute="trailing" secondItem="D8O-Hs-Ewe" secondAttribute="trailing" id="dcG-76-ONR"/>
-                            <constraint firstItem="D8O-Hs-Ewe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ef0-qK-FzL"/>
-                            <constraint firstItem="D8O-Hs-Ewe" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="kji-dp-vJy"/>
-                            <constraint firstItem="D8O-Hs-Ewe" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="nIG-gz-hs5"/>
-                            <constraint firstItem="D8O-Hs-Ewe" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="uoo-N5-kmf"/>
+                            <constraint firstItem="nP1-47-IhR" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-12" id="5bF-hO-OXn"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="nP1-47-IhR" secondAttribute="bottom" constant="-9" id="Ie4-cC-oqq"/>
+                            <constraint firstAttribute="trailing" secondItem="nP1-47-IhR" secondAttribute="trailing" constant="-10" id="Ud1-z8-bid"/>
+                            <constraint firstItem="nP1-47-IhR" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Wec-xK-v0r"/>
+                            <constraint firstItem="nP1-47-IhR" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="e9i-Zg-NxA"/>
+                            <constraint firstItem="nP1-47-IhR" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="-32" id="uGa-Op-eHK"/>
                         </constraints>
                     </view>
                 </viewController>

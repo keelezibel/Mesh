@@ -149,11 +149,6 @@ public class MainActivity extends AppCompatActivity {
                 String incomingTextMessage = (String) message.getContent().get("text");
                 if(message.getData() != null) {
                     byte[] incomingImgMessage = Base64.decode(message.getData(), 0);
-                    for(byte b : incomingImgMessage){
-                        Log.i("myactivity", String.format("0x%20x", b));
-                    }
-
-                    //byte[] incomingImgMessage = message.getData();
                     LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(
                             new Intent(message.getSenderId())
                                     .putExtra(INTENT_EXTRA_MSG, incomingTextMessage)
@@ -170,8 +165,9 @@ public class MainActivity extends AppCompatActivity {
                 //if it's an Android Things device, reply automatically
                 HashMap<String, Object> content = new HashMap<>();
                 content.put("text", "Beep boop. I'm a bot.");
-                Message replyMessage = Bridgefy.createMessage(message.getSenderId(), content);
-                Bridgefy.sendMessage(replyMessage);
+                Message.Builder builder=new Message.Builder();
+                builder.setContent(content).setReceiverId(message.getSenderId());
+                Bridgefy.sendMessage(builder.build());
 
             }
         }

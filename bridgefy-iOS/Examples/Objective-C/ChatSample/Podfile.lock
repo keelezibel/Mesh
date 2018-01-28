@@ -2,11 +2,11 @@ PODS:
   - BFTransmitter (0.1.25.1)
 
 DEPENDENCIES:
-  - BFTransmitter (= 0.1.25.1)
+  - BFTransmitter
 
 SPEC CHECKSUMS:
   BFTransmitter: 66bb4d8273b3b911eed24c3e9eb274dfce137dda
 
-PODFILE CHECKSUM: 558e82a80a9fc801986cecd76e4fad5158ddbfd4
+PODFILE CHECKSUM: 7523f814197efb289ef083b52a1f771b1acee551
 
 COCOAPODS: 1.4.0

@@ -97,10 +97,21 @@ public class ChatActivity extends AppCompatActivity {
                 .registerReceiver(new BroadcastReceiver() {
                     @Override
                     public void onReceive(Context context, Intent intent) {
-                        Message message = new Message(intent.getStringExtra(MainActivity.INTENT_EXTRA_MSG),intent.getByteArrayExtra(MainActivity.INTENT_EXTRA_IMG));
-                        message.setDeviceName(intent.getStringExtra(MainActivity.INTENT_EXTRA_NAME));
-                        message.setDirection(Message.INCOMING_MESSAGE);
-                        messagesAdapter.addMessage(message);
+                        byte[] img = intent.getByteArrayExtra(MainActivity.INTENT_EXTRA_IMG);
+                        // Empty byte[]
+                        if(img.length == 0){
+                            Message message = new Message(intent.getStringExtra(MainActivity.INTENT_EXTRA_MSG),null);
+                            message.setDeviceName(intent.getStringExtra(MainActivity.INTENT_EXTRA_NAME));
+                            message.setDirection(Message.INCOMING_MESSAGE);
+                            messagesAdapter.addMessage(message);
+                        }
+                        // Non-Empty byte[]
+                        else {
+                            Message message = new Message(intent.getStringExtra(MainActivity.INTENT_EXTRA_MSG),intent.getByteArrayExtra(MainActivity.INTENT_EXTRA_IMG));
+                            message.setDeviceName(intent.getStringExtra(MainActivity.INTENT_EXTRA_NAME));
+                            message.setDirection(Message.INCOMING_MESSAGE);
+                            messagesAdapter.addMessage(message);
+                        }
                     }
                 }, new IntentFilter(conversationId));
 
@@ -138,12 +149,27 @@ public class ChatActivity extends AppCompatActivity {
                 // we put extra information in broadcast packets since they won't be bound to a session
                 content.put("device_name", Build.MANUFACTURER + " " + Build.MODEL);
                 content.put("device_type", Peer.DeviceType.ANDROID.ordinal());
+
+                com.bridgefy.sdk.client.Message.Builder builder=new com.bridgefy.sdk.client.Message.Builder();
+                builder.setContent(content);
+                Bridgefy.sendBroadcastMessage(builder.build(),
+                        BFEngineProfile.BFConfigProfileLongReach);
+                /*
                 Bridgefy.sendBroadcastMessage(
                         Bridgefy.createMessage(content),
                         BFEngineProfile.BFConfigProfileLongReach);
+                */
+
             } else {
+                /*
                 Bridgefy.sendMessage(
                         Bridgefy.createMessage(conversationId, content),
+                        BFEngineProfile.BFConfigProfileLongReach);
+                */
+                com.bridgefy.sdk.client.Message.Builder builder=new com.bridgefy.sdk.client.Message.Builder();
+                builder.setContent(content).setReceiverId(conversationId);
+
+                Bridgefy.sendMessage(builder.build(),
                         BFEngineProfile.BFConfigProfileLongReach);
             }
         }

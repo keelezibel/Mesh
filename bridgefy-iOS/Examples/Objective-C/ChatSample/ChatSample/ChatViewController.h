@@ -19,7 +19,6 @@ extern NSString* const broadcastConversation;
 @end
 
 @interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate> {
-    CLLocationManager *locationManager;
 }
 
 @property (nonatomic, retain) NSString* userUUID;
@@ -29,6 +28,7 @@ extern NSString* const broadcastConversation;
 @property (nonatomic) BOOL broadcastType;
 @property (nonatomic) NSMutableArray* messages;
 @property (nonatomic, weak) id<ChatViewControllerDelegate> chatDelegate;
+@property(nonatomic,retain) CLLocationManager *locationManager;
 
 - (void)addMessage:(Message*)message;
 - (void)updateOnlineTo:(BOOL)onlineStatus;
