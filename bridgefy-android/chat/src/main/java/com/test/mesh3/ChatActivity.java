@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.ImageView;
 import android.provider.MediaStore;
 import android.os.Environment;
 import android.net.Uri;
@@ -26,8 +25,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.graphics.drawable.BitmapDrawable;
-import android.database.Cursor;
-import android.provider.MediaStore.Images.Media;
 
 import com.test.mesh3.entities.Message;
 import com.test.mesh3.entities.Peer;
@@ -37,7 +34,6 @@ import com.bridgefy.sdk.client.Bridgefy;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
@@ -46,7 +42,6 @@ import java.text.SimpleDateFormat;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
-import java.nio.ByteBuffer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -97,21 +92,10 @@ public class ChatActivity extends AppCompatActivity {
                 .registerReceiver(new BroadcastReceiver() {
                     @Override
                     public void onReceive(Context context, Intent intent) {
-                        byte[] img = intent.getByteArrayExtra(MainActivity.INTENT_EXTRA_IMG);
-                        // Empty byte[]
-                        if(img.length == 0){
-                            Message message = new Message(intent.getStringExtra(MainActivity.INTENT_EXTRA_MSG),null);
-                            message.setDeviceName(intent.getStringExtra(MainActivity.INTENT_EXTRA_NAME));
-                            message.setDirection(Message.INCOMING_MESSAGE);
-                            messagesAdapter.addMessage(message);
-                        }
-                        // Non-Empty byte[]
-                        else {
-                            Message message = new Message(intent.getStringExtra(MainActivity.INTENT_EXTRA_MSG),intent.getByteArrayExtra(MainActivity.INTENT_EXTRA_IMG));
-                            message.setDeviceName(intent.getStringExtra(MainActivity.INTENT_EXTRA_NAME));
-                            message.setDirection(Message.INCOMING_MESSAGE);
-                            messagesAdapter.addMessage(message);
-                        }
+                        Message message = new Message(intent.getStringExtra(MainActivity.INTENT_EXTRA_MSG),intent.getByteArrayExtra(MainActivity.INTENT_EXTRA_IMG));
+                        message.setDeviceName(intent.getStringExtra(MainActivity.INTENT_EXTRA_NAME));
+                        message.setDirection(Message.INCOMING_MESSAGE);
+                        messagesAdapter.addMessage(message);
                     }
                 }, new IntentFilter(conversationId));
 
@@ -149,27 +133,12 @@ public class ChatActivity extends AppCompatActivity {
                 // we put extra information in broadcast packets since they won't be bound to a session
                 content.put("device_name", Build.MANUFACTURER + " " + Build.MODEL);
                 content.put("device_type", Peer.DeviceType.ANDROID.ordinal());
-
-                com.bridgefy.sdk.client.Message.Builder builder=new com.bridgefy.sdk.client.Message.Builder();
-                builder.setContent(content);
-                Bridgefy.sendBroadcastMessage(builder.build(),
-                        BFEngineProfile.BFConfigProfileLongReach);
-                /*
                 Bridgefy.sendBroadcastMessage(
                         Bridgefy.createMessage(content),
                         BFEngineProfile.BFConfigProfileLongReach);
-                */
-
             } else {
-                /*
                 Bridgefy.sendMessage(
                         Bridgefy.createMessage(conversationId, content),
-                        BFEngineProfile.BFConfigProfileLongReach);
-                */
-                com.bridgefy.sdk.client.Message.Builder builder=new com.bridgefy.sdk.client.Message.Builder();
-                builder.setContent(content).setReceiverId(conversationId);
-
-                Bridgefy.sendMessage(builder.build(),
                         BFEngineProfile.BFConfigProfileLongReach);
             }
         }

@@ -21,8 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.graphics.Bitmap;
-import android.util.Base64;
 
 import com.test.mesh3.entities.Peer;
 import com.bridgefy.sdk.client.Bridgefy;
@@ -37,6 +35,7 @@ import com.bridgefy.sdk.client.StateListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -137,18 +136,23 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onMessageReceived(Message message) {
             // direct messages carrying a Device name represent device handshakes
-            if (message.getContent().get("device_name") != null) {
+            if (message.getContent() != null && message.getContent().get("device_name") != null) {
                 Peer peer = new Peer(message.getSenderId(),
                         (String) message.getContent().get("device_name"));
                 peer.setNearby(true);
                 peer.setDeviceType(extractType(message));
                 peersAdapter.addPeer(peer);
 
-            // any other direct message should be treated as such
+                // any other direct message should be treated as such
             } else {
-                String incomingTextMessage = (String) message.getContent().get("text");
+                String incomingTextMessage = "";
+                if (message.getContent() != null)
+                    incomingTextMessage = (String) message.getContent().get("text");
+
                 if(message.getData() != null) {
-                    byte[] incomingImgMessage = Base64.decode(message.getData(), 0);
+                    byte[] incomingImgMessage = message.getData(); //Base64.decode(message.getData(), 0);
+
+                    //byte[] incomingImgMessage = message.getData();
                     LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(
                             new Intent(message.getSenderId())
                                     .putExtra(INTENT_EXTRA_MSG, incomingTextMessage)
@@ -165,9 +169,8 @@ public class MainActivity extends AppCompatActivity {
                 //if it's an Android Things device, reply automatically
                 HashMap<String, Object> content = new HashMap<>();
                 content.put("text", "Beep boop. I'm a bot.");
-                Message.Builder builder=new Message.Builder();
-                builder.setContent(content).setReceiverId(message.getSenderId());
-                Bridgefy.sendMessage(builder.build());
+                Message replyMessage = Bridgefy.createMessage(message.getSenderId(), content);
+                Bridgefy.sendMessage(replyMessage);
 
             }
         }
@@ -185,6 +188,11 @@ public class MainActivity extends AppCompatActivity {
                             .putExtra(INTENT_EXTRA_NAME, deviceName)
                             .putExtra(INTENT_EXTRA_TYPE, deviceType)
                             .putExtra(INTENT_EXTRA_MSG,  incomingMsg));
+        }
+
+        @Override
+        public void onMessageDataProgress(UUID message, long progress, long fullSize) {
+            Log.i(TAG, "onMessageDataProgress: send: " + progress + " of: " + fullSize);
         }
     };
 

@@ -219,7 +219,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="dyH-8A-Ten"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="map_main" destination="GFh-yQ-dRU" id="PgF-3H-rPz"/>
+                        <outlet property="map_main" destination="GFh-yQ-dRU" id="FXL-Dr-w2f"/>
                         <outlet property="searchBar" destination="4bn-Lz-NvI" id="SFT-AF-gAi"/>
                     </connections>
                 </viewController>

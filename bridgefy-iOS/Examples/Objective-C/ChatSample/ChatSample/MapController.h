@@ -13,6 +13,8 @@
     MKMapView *map_main;
 }
 
+- (MKOverlayView *)mapView:(MKMapView *)map rendererForOverlay:(id <MKOverlay>)overlay;
+
 @property (strong,nonatomic) IBOutlet MKMapView * map_main;
 @property(nonatomic,retain) CLLocationManager *locationManager;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
