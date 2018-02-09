@@ -11,12 +11,16 @@
 
 @interface MapController : UIViewController <MKMapViewDelegate,CLLocationManagerDelegate,UISearchBarDelegate> {
     MKMapView *map_main;
+    CLLocation *currentLocation;
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)map rendererForOverlay:(id <MKOverlay>)overlay;
 
 @property (strong,nonatomic) IBOutlet MKMapView * map_main;
 @property(nonatomic,retain) CLLocationManager *locationManager;
+@property(nonatomic,retain) CLLocation *currentLocation;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property (weak, nonatomic) IBOutlet UIButton *zoomToUser;
 
 @end

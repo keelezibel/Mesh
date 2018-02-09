@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ImageView;
 import android.provider.MediaStore;
 import android.os.Environment;
 import android.net.Uri;
@@ -25,6 +26,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.graphics.drawable.BitmapDrawable;
+import android.database.Cursor;
+import android.provider.MediaStore.Images.Media;
 
 import com.test.mesh3.entities.Message;
 import com.test.mesh3.entities.Peer;
@@ -34,6 +37,7 @@ import com.bridgefy.sdk.client.Bridgefy;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
@@ -42,6 +46,7 @@ import java.text.SimpleDateFormat;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

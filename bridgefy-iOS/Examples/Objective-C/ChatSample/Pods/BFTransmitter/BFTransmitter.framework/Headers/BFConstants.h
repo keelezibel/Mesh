@@ -152,7 +152,15 @@ typedef NS_ENUM(NSUInteger, BFEvent) {
     /**
      * Indicates that the binary part of a packet has been discarded
      */
-    BFEventBinaryDiscarded
+    BFEventBinaryDiscarded,
+    /**
+     * Peer not found
+     */
+    BFEventPeerNotFound,
+    /**
+     * Invalid preloaded license
+     */
+    BFEventInvalidPreloadedLicense
 };
 
 /**

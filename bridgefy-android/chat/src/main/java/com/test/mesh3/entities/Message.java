@@ -1,6 +1,9 @@
 package com.test.mesh3.entities;
 
+import android.graphics.BitmapFactory;
+
 import com.google.gson.Gson;
+import android.graphics.Bitmap;
 
 /**
  * @author dekaru on 5/9/17.

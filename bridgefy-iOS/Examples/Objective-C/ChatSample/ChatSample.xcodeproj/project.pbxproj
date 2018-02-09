@@ -17,6 +17,7 @@
 		7E58EC95201D758E001FECCB /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E58EC94201D758E001FECCB /* MapController.m */; };
 		7E58EC97201D9812001FECCB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E58EC96201D9812001FECCB /* MapKit.framework */; };
 		7E8D3598201B1A3D0015851C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E8D3597201B1A3D0015851C /* Assets.xcassets */; };
+		7EC804BA202D485B009E961C /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC804B9202D485B009E961C /* MapAnnotation.m */; };
 		887973158E9D47EC0F47266D /* libPods-ChatSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7C73E0FA3AD98AD277E8A2 /* libPods-ChatSample.a */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,8 @@
 		7E58EC94201D758E001FECCB /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
 		7E58EC96201D9812001FECCB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7E8D3597201B1A3D0015851C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7EC804B9202D485B009E961C /* MapAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
+		7EC804BB202D4877009E961C /* MapAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
 		801B08660A63D406584BBDCE /* Pods-ChatSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample.release.xcconfig"; sourceTree = "<group>"; };
 		8613FF8DA5AB6F0C36D2D42E /* Pods-ChatSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +102,8 @@
 				5114B13E1D3D975E002D339B /* Supporting Files */,
 				7E58EC93201D7455001FECCB /* MapController.h */,
 				7E58EC94201D758E001FECCB /* MapController.m */,
+				7EC804BB202D4877009E961C /* MapAnnotation.h */,
+				7EC804B9202D485B009E961C /* MapAnnotation.m */,
 				5114B16F1D3DAF2B002D339B /* ChatListController.h */,
 				5114B1701D3DAF2B002D339B /* ChatListController.m */,
 				5114B1721D3DB7EA002D339B /* ChatViewController.h */,
@@ -271,6 +276,7 @@
 				5114B1741D3DB7EA002D339B /* ChatViewController.m in Sources */,
 				7E58EC95201D758E001FECCB /* MapController.m in Sources */,
 				5114B1711D3DAF2B002D339B /* ChatListController.m in Sources */,
+				7EC804BA202D485B009E961C /* MapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

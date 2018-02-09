@@ -6,6 +6,8 @@
 //
 
 #import "MapController.h"
+#import "MapAnnotation.h"
+#define METERS_PER_MILE 1609.344
 
 @interface MapController ()
 
@@ -14,6 +16,7 @@
 @implementation MapController
 
 @synthesize map_main = _map_main;
+@synthesize currentLocation = _currentLocation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,63 +31,47 @@
     // Init locationManager
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
+    self.currentLocation = nil;
     
+    // Set MapView initial location
+    CLLocationCoordinate2D coord = {.latitude = 1.3521, .longitude = 103.8198};
+    [self initMap:coord];
     
-    // Set MapView location
-    CLLocationCoordinate2D coord = {.latitude = 1.39567259, .longitude = 103.74985329};
-    MKCoordinateSpan span = {.latitudeDelta = 0.050f, .longitudeDelta = 0.050f};
-    MKCoordinateRegion region = {coord, span};
-    [_map_main setRegion:region];
-     
+    // Mark personal location on map
+    [self initUpdateLocation];
     
-    MKPlacemark *source = [[MKPlacemark   alloc]initWithCoordinate:CLLocationCoordinate2DMake(1.395581, 103.749943)   addressDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"",@"", nil] ];
-    MKMapItem *srcMapItem = [[MKMapItem alloc]initWithPlacemark:source];
-    [srcMapItem setName:@""];
-    
-    MKPlacemark *destination = [[MKPlacemark alloc]initWithCoordinate:CLLocationCoordinate2DMake(1.302974, 103.810412) addressDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"",@"", nil] ];
-    MKMapItem *distMapItem = [[MKMapItem alloc]initWithPlacemark:destination];
-    [distMapItem setName:@""];
-    
-    MKDirectionsRequest *request = [[MKDirectionsRequest alloc]init];
-    [request setSource:srcMapItem];
-    [request setDestination:distMapItem];
-    [request setTransportType:MKDirectionsTransportTypeAutomobile];
-    
-    MKDirections *direction = [[MKDirections alloc]initWithRequest:request];
-    
-    [direction calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
-        /*
-        NSLog(@"response = %@",response);
-        NSArray *arrRoutes = [response routes];
-        [arrRoutes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            
-            MKRoute *rout = obj;
-            
-            MKPolyline *line = [rout polyline];
-            [_map_main addOverlay:line];
-            NSLog(@"Rout Name : %@",rout.name);
-            NSLog(@"Total Distance (in Meters) :%f",rout.distance);
-            
-            NSArray *steps = [rout steps];
-                        
-            [steps enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                NSLog(@"Rout Instruction : %@",[obj instructions]);
-                NSLog(@"Rout Distance : %f",[obj distance]);
-            }];
-        }];
-         */
-        
-        if (!error) {
-            for (MKRoute *route in [response routes]) {
-                [_map_main addOverlay:[route polyline] level:MKOverlayLevelAboveRoads]; // Draws the route above roads, but below labels.
-                // You can also get turn-by-turn steps, distance, advisory notices, ETA, etc by accessing various route properties.
-            }
-        }
-    }];
 }
 
-- (IBAction)sendGPSLocation:(id)sender
-{
+// Initialize region to zoom in
+- (void)initMap:(CLLocationCoordinate2D)coord{
+    MKCoordinateSpan span = {.latitudeDelta = 0.50f, .longitudeDelta = 0.50f};
+    MKCoordinateRegion region = {coord, span};
+    [_map_main setRegion:region animated:YES];
+}
+
+// Add new method above refreshTapped
+- (void)plotCrimePositions:(NSData *)responseData {
+    for (id<MKAnnotation> annotation in _map_main.annotations) {
+        [_map_main removeAnnotation:annotation];
+    }
+    
+    NSDictionary *root = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+    NSArray *data = [root objectForKey:@"data"];
+    
+    for (NSArray *row in data) {
+        NSNumber * latitude = [[row objectAtIndex:22]objectAtIndex:1];
+        NSNumber * longitude = [[row objectAtIndex:22]objectAtIndex:2];
+        NSString * crimeDescription = [row objectAtIndex:18];
+        
+        CLLocationCoordinate2D coordinate;
+        coordinate.latitude = latitude.doubleValue;
+        coordinate.longitude = longitude.doubleValue;
+        MapAnnotation *annotation = [[MapAnnotation alloc] initWithName:crimeDescription coordinate:coordinate] ;
+        [_map_main addAnnotation:annotation];
+    }
+}
+
+- (void)initUpdateLocation{
     _locationManager.distanceFilter = kCLDistanceFilterNone;
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
@@ -99,25 +86,110 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"didFailWithError: %@", error);
-    UIAlertView *errorAlert = [[UIAlertView alloc]
-                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [errorAlert show];
+    
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Error"
+                                 message:@"Failed to Get Your Location"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okButton = [UIAlertAction
+                                actionWithTitle:@"Ok"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    //Handler for Ok
+                                }];
+    
+    [alert addAction:okButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
 }
 
+// Update location
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     NSLog(@"didUpdateToLocation: %@", newLocation);
-    CLLocation *currentLocation = newLocation;
+    self.currentLocation = newLocation;
     
-    if (currentLocation != nil) {
-        // Set pin
-        MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
-        CLLocationCoordinate2D coordforpin = {.latitude = currentLocation.coordinate.latitude, .longitude = currentLocation.coordinate.longitude};
-        [annotation setCoordinate:coordforpin];
-        [annotation setTitle:@"Test"];
-        [_map_main addAnnotation:annotation];
+    if (self.currentLocation != nil && fabs(self.currentLocation.coordinate.latitude - 0.0) > DBL_EPSILON) {
+        // currentLocation is updated
+        [_locationManager stopUpdatingLocation];
+        // Route from current to dest
+        CLLocationCoordinate2D startCoord = {.latitude = self.currentLocation.coordinate.latitude, .longitude = self.currentLocation.coordinate.longitude};
+        CLLocationCoordinate2D endCoord = {.latitude = 1.340708, .longitude = 103.898001};
+        [self routeSourceDest:startCoord end:endCoord];
     }
-    [_locationManager stopUpdatingLocation];
+}
+
+// Set Routing
+- (void)routeSourceDest:(CLLocationCoordinate2D)startLoc end:(CLLocationCoordinate2D)endLoc{
+    // Set start pin
+    MKPointAnnotation *annotationStart = [[MKPointAnnotation alloc]init];
+    [annotationStart setCoordinate:startLoc];
+    [annotationStart setTitle:@"Your Position"];
+    [_map_main addAnnotation:annotationStart];
+    
+    // Set end pin
+    MKPointAnnotation *annotationEnd = [[MKPointAnnotation alloc]init];
+    [annotationEnd setCoordinate:endLoc];
+    [annotationEnd setTitle:@"Destination"];
+    [_map_main addAnnotation:annotationEnd];
+    
+    // Set start map item
+    MKPlacemark *source = [[MKPlacemark   alloc]initWithCoordinate:CLLocationCoordinate2DMake(startLoc.latitude, startLoc.longitude)   addressDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"",@"", nil] ];
+    MKMapItem *srcMapItem = [[MKMapItem alloc]initWithPlacemark:source];
+    [srcMapItem setName:@""];
+    
+    // Set end map item
+    MKPlacemark *destination = [[MKPlacemark alloc]initWithCoordinate:CLLocationCoordinate2DMake(endLoc.latitude, endLoc.longitude) addressDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"",@"", nil] ];
+    MKMapItem *distMapItem = [[MKMapItem alloc]initWithPlacemark:destination];
+    [distMapItem setName:@""];
+    
+    // Create route from start to destination
+    MKDirectionsRequest *request = [[MKDirectionsRequest alloc]init];
+    [request setSource:srcMapItem];
+    [request setDestination:distMapItem];
+    [request setTransportType:MKDirectionsTransportTypeAutomobile];
+    
+    MKDirections *direction = [[MKDirections alloc]initWithRequest:request];
+    
+    [direction calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
+        
+         NSLog(@"response = %@",response);
+         NSArray *arrRoutes = [response routes];
+         [arrRoutes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+         
+             MKRoute *rout = obj;
+             
+             MKPolyline *line = [rout polyline];
+             [_map_main addOverlay:line];
+             NSLog(@"Rout Name : %@",rout.name);
+             NSLog(@"Total Distance (in Meters) :%f",rout.distance);
+             
+             NSArray *steps = [rout steps];
+             
+             [steps enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                 NSLog(@"Rout Instruction : %@",[obj instructions]);
+                 NSLog(@"Rout Distance : %f",[obj distance]);
+             }];
+         }];
+        /*
+        if (!error) {
+            for (MKRoute *route in [response routes]) {
+                [_map_main addOverlay:[route polyline] level:MKOverlayLevelAboveRoads]; // Draws the route above roads, but below labels.
+                // You can also get turn-by-turn steps, distance, advisory notices, ETA, etc by accessing various route properties.
+            }
+        }
+         */
+    }];
+}
+
+- (IBAction)zoomToUser:(id)sender{
+    CLLocationCoordinate2D startCoord = {.latitude = self.currentLocation.coordinate.latitude, .longitude = self.currentLocation.coordinate.longitude};
+    
+    MKCoordinateSpan span = {.latitudeDelta = 0.0050f, .longitudeDelta = 0.0050f};
+    MKCoordinateRegion region = {startCoord, span};
+    [_map_main setRegion:region animated:YES];
 }
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id)overlay
