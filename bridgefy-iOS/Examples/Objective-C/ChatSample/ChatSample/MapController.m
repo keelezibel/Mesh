@@ -7,6 +7,7 @@
 
 #import "MapController.h"
 #import "MapAnnotation.h"
+
 #define METERS_PER_MILE 1609.344
 
 @interface MapController ()
@@ -20,6 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
     _map_main.delegate=(id)self;
     
     UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]
@@ -40,6 +43,12 @@
     // Mark personal location on map
     [self initUpdateLocation];
     
+    titles = [[NSArray alloc]initWithObjects:@"Test1",@"Test2", nil];
+    descriptions = [[NSArray alloc]initWithObjects:@"THIS IS BLT",@"LUCKY CUTIE", nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
 // Initialize region to zoom in
@@ -184,6 +193,24 @@
     }];
 }
 
+#pragma mark - TableView Delegate and Datasource methods
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return titles.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MapPerson *cell = [tableView dequeueReusableCellWithIdentifier:@"mapPerson" forIndexPath:indexPath];
+    //[cell updateCellWithTitle:[titles objectAtIndex:indexPath.row] description:[descriptions objectAtIndex:indexPath.row] image:[images objectAtIndex:indexPath.row]];
+    [cell updateCellWithTitle:[titles objectAtIndex:indexPath.row] description:[descriptions objectAtIndex:indexPath.row]];
+    cell.backgroundColor = [UIColor clearColor];
+    return cell;
+}
+
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
 - (IBAction)zoomToUser:(id)sender{
     CLLocationCoordinate2D startCoord = {.latitude = self.currentLocation.coordinate.latitude, .longitude = self.currentLocation.coordinate.longitude};
     
@@ -212,5 +239,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 @end

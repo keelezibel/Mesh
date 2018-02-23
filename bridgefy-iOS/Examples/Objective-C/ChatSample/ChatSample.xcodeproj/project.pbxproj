@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5114B1401D3D975E002D339B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B13F1D3D975E002D339B /* main.m */; };
 		5114B1431D3D975E002D339B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1421D3D975E002D339B /* AppDelegate.m */; };
 		5114B1491D3D975E002D339B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5114B1471D3D975E002D339B /* Main.storyboard */; };
 		5114B14E1D3D975E002D339B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5114B14C1D3D975E002D339B /* LaunchScreen.storyboard */; };
 		5114B1711D3DAF2B002D339B /* ChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1701D3DAF2B002D339B /* ChatListController.m */; };
 		5114B1741D3DB7EA002D339B /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1731D3DB7EA002D339B /* ChatViewController.m */; };
 		5114B1771D3ED4F4002D339B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5114B1761D3ED4F4002D339B /* Message.m */; };
+		7E499762203FB686004FEE06 /* MapPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E499761203FB686004FEE06 /* MapPerson.m */; };
+		7E499764203FC3D1004FEE06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E499763203FC3D1004FEE06 /* main.m */; };
+		7E49976A203FD8D3004FEE06 /* DetailsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E499769203FD8D3004FEE06 /* DetailsForm.m */; };
 		7E58EC95201D758E001FECCB /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E58EC94201D758E001FECCB /* MapController.m */; };
 		7E58EC97201D9812001FECCB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E58EC96201D9812001FECCB /* MapKit.framework */; };
 		7E8D3598201B1A3D0015851C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E8D3597201B1A3D0015851C /* Assets.xcassets */; };
@@ -37,7 +39,6 @@
 /* Begin PBXFileReference section */
 		4D7C73E0FA3AD98AD277E8A2 /* libPods-ChatSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChatSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5114B13B1D3D975E002D339B /* ChatSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5114B13F1D3D975E002D339B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5114B1411D3D975E002D339B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5114B1421D3D975E002D339B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5114B1481D3D975E002D339B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -49,6 +50,11 @@
 		5114B1731D3DB7EA002D339B /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		5114B1751D3ED4F4002D339B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		5114B1761D3ED4F4002D339B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		7E499760203FB686004FEE06 /* MapPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapPerson.h; sourceTree = "<group>"; };
+		7E499761203FB686004FEE06 /* MapPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapPerson.m; sourceTree = "<group>"; };
+		7E499763203FC3D1004FEE06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7E499768203FD8D3004FEE06 /* DetailsForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsForm.h; sourceTree = "<group>"; };
+		7E499769203FD8D3004FEE06 /* DetailsForm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsForm.m; sourceTree = "<group>"; };
 		7E58EC93201D7455001FECCB /* MapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
 		7E58EC94201D758E001FECCB /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
 		7E58EC96201D9812001FECCB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -100,6 +106,9 @@
 				7E8D3597201B1A3D0015851C /* Assets.xcassets */,
 				5114B14F1D3D975E002D339B /* Info.plist */,
 				5114B13E1D3D975E002D339B /* Supporting Files */,
+				7E499763203FC3D1004FEE06 /* main.m */,
+				7E499760203FB686004FEE06 /* MapPerson.h */,
+				7E499761203FB686004FEE06 /* MapPerson.m */,
 				7E58EC93201D7455001FECCB /* MapController.h */,
 				7E58EC94201D758E001FECCB /* MapController.m */,
 				7EC804BB202D4877009E961C /* MapAnnotation.h */,
@@ -110,6 +119,8 @@
 				5114B1731D3DB7EA002D339B /* ChatViewController.m */,
 				5114B1751D3ED4F4002D339B /* Message.h */,
 				5114B1761D3ED4F4002D339B /* Message.m */,
+				7E499768203FD8D3004FEE06 /* DetailsForm.h */,
+				7E499769203FD8D3004FEE06 /* DetailsForm.m */,
 			);
 			path = ChatSample;
 			sourceTree = "<group>";
@@ -117,7 +128,6 @@
 		5114B13E1D3D975E002D339B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5114B13F1D3D975E002D339B /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -271,11 +281,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5114B1431D3D975E002D339B /* AppDelegate.m in Sources */,
-				5114B1401D3D975E002D339B /* main.m in Sources */,
 				5114B1771D3ED4F4002D339B /* Message.m in Sources */,
+				7E499762203FB686004FEE06 /* MapPerson.m in Sources */,
 				5114B1741D3DB7EA002D339B /* ChatViewController.m in Sources */,
 				7E58EC95201D758E001FECCB /* MapController.m in Sources */,
+				7E49976A203FD8D3004FEE06 /* DetailsForm.m in Sources */,
 				5114B1711D3DAF2B002D339B /* ChatListController.m in Sources */,
+				7E499764203FC3D1004FEE06 /* main.m in Sources */,
 				7EC804BA202D485B009E961C /* MapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
