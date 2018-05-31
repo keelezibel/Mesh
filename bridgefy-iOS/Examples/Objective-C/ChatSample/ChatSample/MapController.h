@@ -26,6 +26,8 @@
 @property(nonatomic,retain) CLLocation *currentLocation;
 @property(strong,nonatomic) IBOutlet UISearchBar *searchBar;
 
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+
 @property (weak, nonatomic) IBOutlet UIButton *zoomToUser;
 
 @end

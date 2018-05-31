@@ -9,9 +9,12 @@
 #import "MapAnnotation.h"
 
 #define METERS_PER_MILE 1609.344
+#define FULLPATH(X) [[NSSearchPathForDirectoriesInDomains\
+(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]\
+stringByAppendingPathComponent:(X)]
 
 @interface MapController ()
-
+@property (nonnull, retain) NSMutableDictionary *locations;
 @end
 
 @implementation MapController
@@ -21,6 +24,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 5 sec timer
+    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(reloadTable) userInfo:nil repeats:YES];
+
+    // Load location information
+    self.locations = [self loadLocation];
+    
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     _map_main.delegate=(id)self;
@@ -43,12 +53,49 @@
     // Mark personal location on map
     [self initUpdateLocation];
     
-    titles = [[NSArray alloc]initWithObjects:@"Test1",@"Test2", nil];
-    descriptions = [[NSArray alloc]initWithObjects:@"THIS IS BLT",@"LUCKY CUTIE", nil];
+    titles = [[NSArray alloc] init];
+    titles = [self.locations allKeys];
+    descriptions = [[NSArray alloc] init];
+    descriptions = [self.locations allValues];
+    [self.tableView reloadData];
+    
+    [self plotPositions];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+-(void) reloadTable
+{
+    //Load location information
+    self.locations = [self loadLocation];
+    
+    titles = [[NSArray alloc] init];
+    titles = [self.locations allKeys];
+    [self.tableView reloadData];
+    descriptions = [[NSArray alloc] init];
+    descriptions = [self.locations allValues];
+    [self.tableView reloadData];
+    
+    [self plotPositions];
+}
+
+-(NSMutableDictionary *)loadLocation
+{
+    NSString * const locFile = @"locfile";
+    NSString * filePath = FULLPATH(locFile);
+    NSData * data = [NSData dataWithContentsOfFile:filePath];
+    
+    NSMutableDictionary *locations;
+    if (data) {
+        locations = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    
+    if (locations == nil)
+        locations = [[NSMutableDictionary alloc] init];
+    
+    return locations;
 }
 
 // Initialize region to zoom in
@@ -59,23 +106,31 @@
 }
 
 // Add new method above refreshTapped
-- (void)plotCrimePositions:(NSData *)responseData {
+- (void)plotPositions {
     for (id<MKAnnotation> annotation in _map_main.annotations) {
         [_map_main removeAnnotation:annotation];
     }
     
-    NSDictionary *root = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
-    NSArray *data = [root objectForKey:@"data"];
-    
-    for (NSArray *row in data) {
-        NSNumber * latitude = [[row objectAtIndex:22]objectAtIndex:1];
-        NSNumber * longitude = [[row objectAtIndex:22]objectAtIndex:2];
-        NSString * crimeDescription = [row objectAtIndex:18];
+    //Load location information
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    self.locations = [self loadLocation];
+    for (NSString * key in self.locations) {
+        NSString * value = self.locations[key];
+        NSArray * pos = [value componentsSeparatedByString: @","];
+        NSString * latStr = [pos[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSString * lonStr = [pos[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSNumber * latitude = [f numberFromString:latStr];
+        double latDouble = [latitude doubleValue];
+        NSNumber * longitude = [f numberFromString:lonStr];
+        double lonDouble = [longitude doubleValue];
+        
+        NSString * locDescription = key;
         
         CLLocationCoordinate2D coordinate;
-        coordinate.latitude = latitude.doubleValue;
-        coordinate.longitude = longitude.doubleValue;
-        MapAnnotation *annotation = [[MapAnnotation alloc] initWithName:crimeDescription coordinate:coordinate] ;
+        coordinate.latitude = latDouble;
+        coordinate.longitude = lonDouble;
+        MapAnnotation *annotation = [[MapAnnotation alloc] initWithName:locDescription coordinate:coordinate] ;
         [_map_main addAnnotation:annotation];
     }
 }
@@ -171,7 +226,7 @@
              MKRoute *rout = obj;
              
              MKPolyline *line = [rout polyline];
-             [_map_main addOverlay:line];
+             [self->_map_main addOverlay:line];
              NSLog(@"Rout Name : %@",rout.name);
              NSLog(@"Total Distance (in Meters) :%f",rout.distance);
              
@@ -182,14 +237,6 @@
                  NSLog(@"Rout Distance : %f",[obj distance]);
              }];
          }];
-        /*
-        if (!error) {
-            for (MKRoute *route in [response routes]) {
-                [_map_main addOverlay:[route polyline] level:MKOverlayLevelAboveRoads]; // Draws the route above roads, but below labels.
-                // You can also get turn-by-turn steps, distance, advisory notices, ETA, etc by accessing various route properties.
-            }
-        }
-         */
     }];
 }
 
@@ -200,7 +247,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MapPerson *cell = [tableView dequeueReusableCellWithIdentifier:@"mapPerson" forIndexPath:indexPath];
-    //[cell updateCellWithTitle:[titles objectAtIndex:indexPath.row] description:[descriptions objectAtIndex:indexPath.row] image:[images objectAtIndex:indexPath.row]];
     [cell updateCellWithTitle:[titles objectAtIndex:indexPath.row] description:[descriptions objectAtIndex:indexPath.row]];
     cell.backgroundColor = [UIColor clearColor];
     return cell;

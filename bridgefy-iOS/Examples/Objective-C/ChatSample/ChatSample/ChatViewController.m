@@ -104,13 +104,59 @@ NSString* const broadcastConversation = @"broadcast";
 
 - (IBAction)sendGPSLocation:(id)sender
 {
-    _locationManager.distanceFilter = kCLDistanceFilterNone;
-    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Share Location"
+                                 message:@"Send periodic location updates to this user?"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okButton = [UIAlertAction
+                               actionWithTitle:@"Share Location"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   // Send location updates every 5secs
+                                   self.shareLocationTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(startSharingLocation) userInfo:nil repeats:YES];
+                                   [self startSharingLocation];
+                                   self.shareLocation = YES;
+                               }];
+    
+    UIAlertAction* stopButton = [UIAlertAction
+                               actionWithTitle:@"Stop Sharing Location"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   [self cancelSharingLocation];
+                                   self.shareLocation = NO;
+                                   [self.shareLocationTimer invalidate];
+                                   self.shareLocationTimer = nil;
+                               }];
+    
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:@"Cancel"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   if(self.shareLocation){
+                                        [self startSharingLocation];
+                                   }
+                               }];
+    
+    [alert addAction:okButton];
+    [alert addAction:stopButton];
+    [alert addAction:noButton];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+-(void) cancelSharingLocation {
+    [_locationManager stopUpdatingLocation];
+    self.textField.text = @"";
+}
+
+- (void)startSharingLocation {
+    self->_locationManager.distanceFilter = kCLDistanceFilterNone;
+    self->_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-    if ([_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [_locationManager requestWhenInUseAuthorization];
+    if ([self->_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self->_locationManager requestWhenInUseAuthorization];
     }
-    [_locationManager startUpdatingLocation];
+    [self->_locationManager startUpdatingLocation];
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -143,9 +189,30 @@ NSString* const broadcastConversation = @"broadcast";
     CLLocation *currentLocation = newLocation;
     
     if (currentLocation != nil) {
-        self.textField.text = [NSString stringWithFormat:@"%.8f, %.8f", currentLocation.coordinate.latitude,currentLocation.coordinate.longitude];
+        [self sendUpdatedLocation:currentLocation];
     }
     [_locationManager stopUpdatingLocation];
+}
+
+- (void)sendUpdatedLocation:(CLLocation *) currentLocation {
+    NSString * loc = [NSString stringWithFormat:@"Location: %.8f, %.8f", currentLocation.coordinate.latitude,currentLocation.coordinate.longitude];
+    
+    Message* message = [[Message alloc] init];
+    message.text = loc;
+    message.imageData = NULL;
+    message.date = [NSDate date];
+    message.received = NO;
+    message.broadcast = self.broadcastType;
+    
+    if (self.broadcastType) {
+        [self.chatDelegate sendMessage:message
+                        toConversation:broadcastConversation];
+    }
+    else {
+        //If conversation is not broadcast send a direct message to the UUID
+        [self.chatDelegate sendMessage:message
+                        toConversation:self.userUUID];
+    }
 }
 
 - (IBAction)accessPhotoLib:(id)sender

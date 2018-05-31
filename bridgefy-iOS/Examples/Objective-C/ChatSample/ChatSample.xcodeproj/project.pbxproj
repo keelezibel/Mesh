@@ -20,6 +20,7 @@
 		7E58EC97201D9812001FECCB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E58EC96201D9812001FECCB /* MapKit.framework */; };
 		7E8D3598201B1A3D0015851C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E8D3597201B1A3D0015851C /* Assets.xcassets */; };
 		7EC804BA202D485B009E961C /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC804B9202D485B009E961C /* MapAnnotation.m */; };
+		847978DF20AFC4B800A379EA /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 847978DD20AFC4B800A379EA /* Location.m */; };
 		887973158E9D47EC0F47266D /* libPods-ChatSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7C73E0FA3AD98AD277E8A2 /* libPods-ChatSample.a */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,8 @@
 		7EC804B9202D485B009E961C /* MapAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		7EC804BB202D4877009E961C /* MapAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
 		801B08660A63D406584BBDCE /* Pods-ChatSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample.release.xcconfig"; sourceTree = "<group>"; };
+		847978DD20AFC4B800A379EA /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		847978DE20AFC4B800A379EA /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		8613FF8DA5AB6F0C36D2D42E /* Pods-ChatSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +120,8 @@
 				5114B1701D3DAF2B002D339B /* ChatListController.m */,
 				5114B1721D3DB7EA002D339B /* ChatViewController.h */,
 				5114B1731D3DB7EA002D339B /* ChatViewController.m */,
+				847978DE20AFC4B800A379EA /* Location.h */,
+				847978DD20AFC4B800A379EA /* Location.m */,
 				5114B1751D3ED4F4002D339B /* Message.h */,
 				5114B1761D3ED4F4002D339B /* Message.m */,
 				7E499768203FD8D3004FEE06 /* DetailsForm.h */,
@@ -180,7 +185,7 @@
 		5114B1331D3D975E002D339B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Bridgefy Inc.";
 				TargetAttributes = {
 					5114B13A1D3D975E002D339B = {
@@ -286,6 +291,7 @@
 				5114B1741D3DB7EA002D339B /* ChatViewController.m in Sources */,
 				7E58EC95201D758E001FECCB /* MapController.m in Sources */,
 				7E49976A203FD8D3004FEE06 /* DetailsForm.m in Sources */,
+				847978DF20AFC4B800A379EA /* Location.m in Sources */,
 				5114B1711D3DAF2B002D339B /* ChatListController.m in Sources */,
 				7E499764203FC3D1004FEE06 /* main.m in Sources */,
 				7EC804BA202D485B009E961C /* MapAnnotation.m in Sources */,
@@ -326,12 +332,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -378,12 +386,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

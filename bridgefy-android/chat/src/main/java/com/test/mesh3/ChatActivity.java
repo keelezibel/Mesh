@@ -196,6 +196,8 @@ public class ChatActivity extends AppCompatActivity {
                             //builder.setContent(content).setReceiverId(conversationId);
                             builder.setData(arr).setReceiverId(conversationId);
 
+                            System.out.println(Arrays.toString(arr));
+
                             Bridgefy.sendMessage(builder.build(),
                                     BFEngineProfile.BFConfigProfileLongReach);
                         }

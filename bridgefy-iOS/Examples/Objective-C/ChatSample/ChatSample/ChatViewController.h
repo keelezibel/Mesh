@@ -29,6 +29,8 @@ extern NSString* const broadcastConversation;
 @property (nonatomic) NSMutableArray* messages;
 @property (nonatomic, weak) id<ChatViewControllerDelegate> chatDelegate;
 @property(nonatomic,retain) CLLocationManager *locationManager;
+@property (nonatomic) BOOL shareLocation;
+@property (nonatomic) NSTimer * shareLocationTimer;
 
 - (void)addMessage:(Message*)message;
 - (void)updateOnlineTo:(BOOL)onlineStatus;

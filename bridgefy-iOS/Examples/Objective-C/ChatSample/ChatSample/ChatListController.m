@@ -9,6 +9,7 @@
 #import "ChatListController.h"
 #import <BFTransmitter/BFTransmitter.h>
 #import "Message.h"
+#import "Location.h"
 
 #import "ChatViewController.h"
 
@@ -21,6 +22,7 @@ stringByAppendingPathComponent:(X)]
 
 NSInteger const onlineSection = 0;
 NSString * const peersFile = @"peersfile";
+NSString * const locFile = @"locfile";
 NSString * const messageTextKey = @"text";
 NSString * const peerNameKey = @"device_name";
 NSString * const peerTypeKey = @"device_type";
@@ -462,6 +464,21 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
                             self.chatController != nil &&
                             self.chatController.broadcastType;
     
+    // If message contains location information, save location
+    if ([text rangeOfString:@"Location: "].location != NSNotFound)
+    {
+        NSArray *locItems = [text componentsSeparatedByString:@": "];
+        NSString * locInfo = locItems[1];
+        
+        Location * loc = [[Location alloc] init];
+        loc.location = locInfo;
+        loc.received = YES;
+        loc.date = [NSDate date];
+        loc.sender = message.sender;
+        
+        [self saveLocation:loc forConversation:conversation];
+    }
+    
     if (showingBroadcast || showingSameUser)
     {
         // If the related conversation to the message is being shown.
@@ -578,6 +595,33 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
     
 }
 
+-(void)saveLocation:(Location *)location forConversation:(NSString *)conversation
+{
+    NSString * filePath = FULLPATH(locFile);
+    NSMutableDictionary * locations = [self loadLocation];
+    // Update location for sender
+    [locations setObject:location.location forKey:location.sender];
+    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:locations];
+    [data writeToFile:filePath atomically:YES];
+    
+}
+
+-(NSMutableDictionary *)loadLocation
+{
+    NSString * filePath = FULLPATH(locFile);
+    NSData * data = [NSData dataWithContentsOfFile:filePath];
+    
+    NSMutableDictionary *locations;
+    if (data) {
+        locations = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    
+    if (locations == nil)
+        locations = [[NSMutableDictionary alloc] init];
+    
+    return locations;
+}
+
 -(NSMutableArray *)loadMessagesForConversation:(NSString *)conversation
 {
     NSString * chatFile = [NSString stringWithFormat:@"%@.chat", conversation];
@@ -605,6 +649,7 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
 -(void)loadPeers
 {
     NSString * filePath = FULLPATH(peersFile);
+    NSLog(@"Filepath of Peers: %@",filePath);
     NSData * data = [NSData dataWithContentsOfFile:filePath];
     if (data != nil) {
         self.peerNamesDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
