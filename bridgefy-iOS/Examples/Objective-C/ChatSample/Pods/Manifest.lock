@@ -1,12 +1,20 @@
 PODS:
   - BFTransmitter (0.1.28)
+  - Mapbox-iOS-SDK (4.0.5)
 
 DEPENDENCIES:
   - BFTransmitter
+  - Mapbox-iOS-SDK
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - BFTransmitter
+    - Mapbox-iOS-SDK
 
 SPEC CHECKSUMS:
   BFTransmitter: 18554f0fb9afc40794fad511af47c5930647abed
+  Mapbox-iOS-SDK: c6bab367011e441e7345d4fe9340633c6b476bf4
 
-PODFILE CHECKSUM: 7523f814197efb289ef083b52a1f771b1acee551
+PODFILE CHECKSUM: 2e805d45c072f212b3fc17eb3cbf27b74aab40b4
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

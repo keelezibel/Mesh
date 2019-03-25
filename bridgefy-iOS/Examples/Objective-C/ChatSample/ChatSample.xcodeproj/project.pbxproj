@@ -18,9 +18,11 @@
 		7E49976A203FD8D3004FEE06 /* DetailsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E499769203FD8D3004FEE06 /* DetailsForm.m */; };
 		7E58EC95201D758E001FECCB /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E58EC94201D758E001FECCB /* MapController.m */; };
 		7E58EC97201D9812001FECCB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E58EC96201D9812001FECCB /* MapKit.framework */; };
-		7E8D3598201B1A3D0015851C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E8D3597201B1A3D0015851C /* Assets.xcassets */; };
 		7EC804BA202D485B009E961C /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC804B9202D485B009E961C /* MapAnnotation.m */; };
+		841899D42105779900343B81 /* AnnouncementListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841899D32105779900343B81 /* AnnouncementListController.m */; };
+		841899D821057F0500343B81 /* Announcement.m in Sources */ = {isa = PBXBuildFile; fileRef = 841899D721057F0500343B81 /* Announcement.m */; };
 		847978DF20AFC4B800A379EA /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 847978DD20AFC4B800A379EA /* Location.m */; };
+		8487521F21DDD8EA0074C35D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8487521E21DDD8E90074C35D /* Assets.xcassets */; };
 		887973158E9D47EC0F47266D /* libPods-ChatSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7C73E0FA3AD98AD277E8A2 /* libPods-ChatSample.a */; };
 /* End PBXBuildFile section */
 
@@ -59,12 +61,16 @@
 		7E58EC93201D7455001FECCB /* MapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
 		7E58EC94201D758E001FECCB /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
 		7E58EC96201D9812001FECCB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		7E8D3597201B1A3D0015851C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EC804B9202D485B009E961C /* MapAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		7EC804BB202D4877009E961C /* MapAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
 		801B08660A63D406584BBDCE /* Pods-ChatSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample.release.xcconfig"; sourceTree = "<group>"; };
+		841899D32105779900343B81 /* AnnouncementListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnnouncementListController.m; sourceTree = "<group>"; };
+		841899D5210577B700343B81 /* AnnouncementListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnnouncementListController.h; sourceTree = "<group>"; };
+		841899D621057EF800343B81 /* Announcement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Announcement.h; sourceTree = "<group>"; };
+		841899D721057F0500343B81 /* Announcement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Announcement.m; sourceTree = "<group>"; };
 		847978DD20AFC4B800A379EA /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		847978DE20AFC4B800A379EA /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		8487521E21DDD8E90074C35D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8613FF8DA5AB6F0C36D2D42E /* Pods-ChatSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,7 +112,7 @@
 				5114B1421D3D975E002D339B /* AppDelegate.m */,
 				5114B1471D3D975E002D339B /* Main.storyboard */,
 				5114B14C1D3D975E002D339B /* LaunchScreen.storyboard */,
-				7E8D3597201B1A3D0015851C /* Assets.xcassets */,
+				8487521E21DDD8E90074C35D /* Assets.xcassets */,
 				5114B14F1D3D975E002D339B /* Info.plist */,
 				5114B13E1D3D975E002D339B /* Supporting Files */,
 				7E499763203FC3D1004FEE06 /* main.m */,
@@ -116,12 +122,16 @@
 				7E58EC94201D758E001FECCB /* MapController.m */,
 				7EC804BB202D4877009E961C /* MapAnnotation.h */,
 				7EC804B9202D485B009E961C /* MapAnnotation.m */,
+				841899D5210577B700343B81 /* AnnouncementListController.h */,
+				841899D32105779900343B81 /* AnnouncementListController.m */,
 				5114B16F1D3DAF2B002D339B /* ChatListController.h */,
 				5114B1701D3DAF2B002D339B /* ChatListController.m */,
 				5114B1721D3DB7EA002D339B /* ChatViewController.h */,
 				5114B1731D3DB7EA002D339B /* ChatViewController.m */,
 				847978DE20AFC4B800A379EA /* Location.h */,
 				847978DD20AFC4B800A379EA /* Location.m */,
+				841899D621057EF800343B81 /* Announcement.h */,
+				841899D721057F0500343B81 /* Announcement.m */,
 				5114B1751D3ED4F4002D339B /* Message.h */,
 				5114B1761D3ED4F4002D339B /* Message.m */,
 				7E499768203FD8D3004FEE06 /* DetailsForm.h */,
@@ -168,7 +178,6 @@
 				5114B1391D3D975E002D339B /* Resources */,
 				5114B1611D3DA1C3002D339B /* Embed Frameworks */,
 				D100FA9F698DE3493A147AFF /* [CP] Embed Pods Frameworks */,
-				698932EEE369C6A0A0951D6C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -219,7 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5114B14E1D3D975E002D339B /* LaunchScreen.storyboard in Resources */,
-				7E8D3598201B1A3D0015851C /* Assets.xcassets in Resources */,
+				8487521F21DDD8EA0074C35D /* Assets.xcassets in Resources */,
 				5114B1491D3D975E002D339B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,21 +254,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		698932EEE369C6A0A0951D6C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D100FA9F698DE3493A147AFF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -268,10 +262,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ChatSample/Pods-ChatSample-frameworks.sh",
 				"${PODS_ROOT}/BFTransmitter/BFTransmitter.framework",
+				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
+				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BFTransmitter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -285,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841899D821057F0500343B81 /* Announcement.m in Sources */,
 				5114B1431D3D975E002D339B /* AppDelegate.m in Sources */,
 				5114B1771D3ED4F4002D339B /* Message.m in Sources */,
 				7E499762203FB686004FEE06 /* MapPerson.m in Sources */,
@@ -294,6 +293,7 @@
 				847978DF20AFC4B800A379EA /* Location.m in Sources */,
 				5114B1711D3DAF2B002D339B /* ChatListController.m in Sources */,
 				7E499764203FC3D1004FEE06 /* main.m in Sources */,
+				841899D42105779900343B81 /* AnnouncementListController.m in Sources */,
 				7EC804BA202D485B009E961C /* MapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,7 +347,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: letang.boon@gmail.com (UXD58NYB5L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: letang.boon@gmail.com (UXD58NYB5L)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -401,7 +402,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: letang.boon@gmail.com (UXD58NYB5L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: letang.boon@gmail.com (UXD58NYB5L)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -427,11 +429,12 @@
 			baseConfigurationReference = 8613FF8DA5AB6F0C36D2D42E /* Pods-ChatSample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Appicon-1";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 96XBZBC874;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ChatSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.mesh3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -445,11 +448,12 @@
 			baseConfigurationReference = 801B08660A63D406584BBDCE /* Pods-ChatSample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Appicon-1";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 96XBZBC874;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ChatSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.mesh3;
 				PRODUCT_NAME = "$(TARGET_NAME)";

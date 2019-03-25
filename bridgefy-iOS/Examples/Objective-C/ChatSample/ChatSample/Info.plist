@@ -55,6 +55,13 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1Ijoia2VlbGV6aWJlbCIsImEiOiJjanFpcm82NGwwM2IyNDNtbGU4OXJwd3gxIn0.3Izv7wXcEM6mOkSxzLauMw</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

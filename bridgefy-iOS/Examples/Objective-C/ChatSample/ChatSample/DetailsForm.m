@@ -2,11 +2,9 @@
 //  DetailsForm.m
 //  ChatSample
 //
-//  Created by Le Tang Boon on 2/23/18.
-//  Copyright © 2018 Bridgefy Inc. All rights reserved.
-//
 
 #import "DetailsForm.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface DetailsForm ()
 
@@ -16,8 +14,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleText.delegate = self;
+    self.nameText.delegate = self;
     self.descText.delegate = self;
+
+    self.nameText.layer.borderWidth = 1.0f;
+    self.nameText.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.descText.layer.borderWidth = 1.0f;
+    self.descText.layer.borderColor = [[UIColor grayColor] CGColor];
+    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]
@@ -49,7 +53,7 @@
 
 -(void)animateTextField:(UITextField*)textField up:(BOOL)up
 {
-    const int movementDistance = -130; // tweak as needed
+    const int movementDistance = -70; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
     int movement = (up ? movementDistance : -movementDistance);
@@ -73,7 +77,7 @@
 
 -(void)animateTextView:(UITextField*)textView up:(BOOL)up
 {
-    const int movementDistance = -150; // tweak as needed
+    const int movementDistance = -70; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
     int movement = (up ? movementDistance : -movementDistance);
@@ -89,7 +93,12 @@
 {
     // add self
     [self.descText resignFirstResponder];
-    [self.titleText resignFirstResponder];
+    [self.nameText resignFirstResponder];
+}
+
+- (IBAction)submitForm:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 @end

@@ -2,9 +2,6 @@
 //  ChatViewController.m
 //  ChatSample
 //
-//  Created by Daniel Heredia on 7/18/16.
-//  Copyright © 2017 Bridgefy Inc. All rights reserved.
-//
 
 #import "ChatViewController.h"
 #import "MapController.h"
@@ -21,6 +18,7 @@ NSString* const broadcastConversation = @"broadcast";
 {
     [super viewDidLoad];
     [self setOnlineStatus];
+    self.announcementBool = FALSE;
     if (self.broadcastType) {
         self.navigationItem.title = @"Broadcast";
     }
@@ -86,8 +84,25 @@ NSString* const broadcastConversation = @"broadcast";
     message.date = [NSDate date];
     message.received = NO;
     message.broadcast = self.broadcastType;
+    message.announcement = FALSE;
 
     if (self.broadcastType) {
+        if (self.announcementBool) {
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Announcement is made"
+                                         message:@"An announcement is made"
+                                         preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* okButton = [UIAlertAction
+                                       actionWithTitle:@"Ok"
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction * action) {
+                                           
+                                       }];
+            [alert addAction:okButton];
+            [self presentViewController:alert animated:YES completion:nil];
+            message.announcement = TRUE;
+        }
         [self.chatDelegate sendMessage:message
                         toConversation:broadcastConversation];
     }
@@ -98,15 +113,17 @@ NSString* const broadcastConversation = @"broadcast";
     }
 
     self.textField.text = @"";
-    [self.messages insertObject:message atIndex:0];
-    [self addRowToTable];
+    if ([message.text rangeOfString:@"Location: "].location == NSNotFound) {
+        [self.messages insertObject:message atIndex:0];
+        [self addRowToTable];
+    }
 }
 
 - (IBAction)sendGPSLocation:(id)sender
 {
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:@"Share Location"
-                                 message:@"Send periodic location updates to this user?"
+                                 message:@"Send location updates?"
                                  preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* okButton = [UIAlertAction
@@ -150,13 +167,15 @@ NSString* const broadcastConversation = @"broadcast";
 }
 
 - (void)startSharingLocation {
-    self->_locationManager.distanceFilter = kCLDistanceFilterNone;
-    self->_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-    if ([self->_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self->_locationManager requestWhenInUseAuthorization];
+    if(self.shareLocation) {
+        self->_locationManager.distanceFilter = kCLDistanceFilterNone;
+        self->_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+        if ([self->_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [self->_locationManager requestWhenInUseAuthorization];
+        }
+        [self->_locationManager startUpdatingLocation];
     }
-    [self->_locationManager startUpdatingLocation];
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -212,6 +231,89 @@ NSString* const broadcastConversation = @"broadcast";
         //If conversation is not broadcast send a direct message to the UUID
         [self.chatDelegate sendMessage:message
                         toConversation:self.userUUID];
+    }
+}
+
+- (IBAction)sendImage:(id)sender
+{
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Send Image"
+                                 message:@"Share images with this user?"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okButton = [UIAlertAction
+                               actionWithTitle:@"Camera"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   [self accessCamera:sender];
+                               }];
+    
+    UIAlertAction* stopButton = [UIAlertAction
+                                 actionWithTitle:@"Photo Library"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action) {
+                                     [self accessPhotoLib:sender];
+                                 }];
+    
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:@"Cancel"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                               }];
+    
+    [alert addAction:okButton];
+    [alert addAction:stopButton];
+    [alert addAction:noButton];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (IBAction)sendAnnouncements:(id)sender
+{
+    if (!self.announcementBool) {
+        [sender setImage:[UIImage imageNamed:@"announcementSel.png"] forState:UIControlStateSelected];
+        [sender setSelected:YES];
+        
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Broadcast announcement"
+                                     message:@"Broadcast announcement to all nearby users"
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* okButton = [UIAlertAction
+                                   actionWithTitle:@"Proceed"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       self.announcementBool = TRUE;
+                                   }];
+        
+        UIAlertAction* cancelButton = [UIAlertAction
+                                     actionWithTitle:@"Cancel"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action) {
+                                        self.announcementBool = FALSE;
+                                     }];
+        [alert addAction:okButton];
+        [alert addAction:cancelButton];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    } else {
+        [sender setImage:[UIImage imageNamed:@"announcement.png"]
+            forState:UIControlStateNormal];
+        [sender setSelected:NO];
+        
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Broadcast announcement turn off"
+                                     message:@"Turned off announcement"
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* okButton = [UIAlertAction
+                                   actionWithTitle:@"Ok"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                   }];
+
+        self.announcementBool = FALSE;
+        [alert addAction:okButton];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -297,9 +399,9 @@ NSString* const broadcastConversation = @"broadcast";
 {
     return [self.messages count];
 }
+
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
 
     UILabel* userLabel = [(UILabel*)cell.contentView viewWithTag:1000];

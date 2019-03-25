@@ -2,9 +2,6 @@
 //  ChatListController.m
 //  ChatSample
 //
-//  Created by Daniel Heredia on 7/18/16.
-//  Copyright © 2017 Bridgefy Inc. All rights reserved.
-//
 
 #import "ChatListController.h"
 #import <BFTransmitter/BFTransmitter.h>
@@ -23,6 +20,7 @@ stringByAppendingPathComponent:(X)]
 NSInteger const onlineSection = 0;
 NSString * const peersFile = @"peersfile";
 NSString * const locFile = @"locfile";
+NSString * const announcementFile = @"announcementfile";
 NSString * const messageTextKey = @"text";
 NSString * const peerNameKey = @"device_name";
 NSString * const peerTypeKey = @"device_type";
@@ -195,7 +193,7 @@ NSString * const peerTypeKey = @"device_type";
         // The message isn't broadcast, instead is a direct message.
         // A direct message can be encrypted.
         receiverUUID = uuid;
-        options = (BFSendingOptionDirectTransmission | BFSendingOptionEncrypted);
+        options = (BFSendingOptionMeshTransmission | BFSendingOptionEncrypted);
         
         // Creation of the dictionary for the message to be sent
         if(message.imageData == nil) {
@@ -412,7 +410,7 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
                                  peerTypeKey: @(DeviceTypeIos)
                                  };
     NSError *error;
-    BFSendingOption options = (BFSendingOptionDirectTransmission | BFSendingOptionEncrypted);
+    BFSendingOption options = (BFSendingOptionMeshTransmission | BFSendingOptionEncrypted);
     
     [self.transmitter sendDictionary:dictionary
                               toUser:user
@@ -481,9 +479,11 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
     
     if (showingBroadcast || showingSameUser)
     {
-        // If the related conversation to the message is being shown.
-        // update messages.
-        [self.chatController addMessage:message];
+        if ([message.text rangeOfString:@"Location: "].location == NSNotFound) {
+            // If the related conversation to the message is being shown.
+            // update messages.
+            [self.chatController addMessage:message];
+        }
     }
 }
 
@@ -499,6 +499,7 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
     // Check device type
     NSDictionary *peerInfo = self.peerNamesDictionary[user];
     DeviceType msgDevice = (DeviceType)[peerInfo[@"type"] intValue];
+    /*
     if(msgDevice == DeviceTypeAndroid){
         NSData * newImgData = [imageData subdataWithRange:NSMakeRange(15, imageData.length-15-8)];
         message.imageData = newImgData;
@@ -506,6 +507,8 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
     else {
         message.imageData = imageData;
     }
+     */
+    message.imageData = imageData;
     NSLog(@"Received data %@", message.imageData);
     
     message.received = YES;
@@ -593,6 +596,22 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
     NSData * data = [NSKeyedArchiver archivedDataWithRootObject:messages];
     [data writeToFile:filePath atomically:YES];
     
+    NSLog(@"Saving announcement: %@", message);
+    if(message.announcement) {
+        NSLog(@"Saving announcement");
+        [self saveAnnouncement:message];
+    }
+    
+}
+
+-(void)saveAnnouncement:(Message *)message
+{
+    NSString * filePath = FULLPATH(announcementFile);
+    NSMutableArray * announcements = [self loadAnnouncements];
+    [announcements insertObject:message atIndex:0];
+    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:announcements];
+    [data writeToFile:filePath atomically:YES];
+    NSLog(@"Announcement: %@", data);
 }
 
 -(void)saveLocation:(Location *)location forConversation:(NSString *)conversation
@@ -600,11 +619,28 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
     NSString * filePath = FULLPATH(locFile);
     NSMutableDictionary * locations = [self loadLocation];
     // Update location for sender
-    [locations setObject:location.location forKey:location.sender];
+    [locations setObject:location forKey:location.sender];
     NSData * data = [NSKeyedArchiver archivedDataWithRootObject:locations];
     [data writeToFile:filePath atomically:YES];
     
 }
+
+-(NSMutableArray *)loadAnnouncements
+{
+    NSString * filePath = FULLPATH(announcementFile);
+    NSData * data = [NSData dataWithContentsOfFile:filePath];
+    
+    NSMutableArray *messages;
+    if (data) {
+        messages = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    
+    if (messages == nil)
+        messages = [[NSMutableArray alloc] init];
+
+    return messages;
+}
+
 
 -(NSMutableDictionary *)loadLocation
 {
@@ -630,7 +666,7 @@ didReceiveDictionary:(NSDictionary<NSString *, id> * _Nullable) dictionary
     
     NSMutableArray *messages;
     if (data) {
-         messages = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        messages = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     
     if (messages == nil)

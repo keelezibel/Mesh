@@ -2,9 +2,6 @@
 //  Message.m
 //  ChatSample
 //
-//  Created by Daniel Heredia on 7/19/16.
-//  Copyright © 2017 Bridgefy Inc. All rights reserved.
-//
 
 #import "Message.h"
 
@@ -17,6 +14,7 @@
         self.text = [decoder decodeObjectForKey:@"text"];
         self.imageData = [decoder decodeObjectForKey:@"image"];
         self.received = [[decoder decodeObjectForKey:@"received"] boolValue];
+        self.announcement = [[decoder decodeObjectForKey:@"announcement"] boolValue];
         self.date = [decoder decodeObjectForKey:@"date"];
         self.mesh = [[decoder decodeObjectForKey:@"mesh"] boolValue];
         self.broadcast = [[decoder decodeObjectForKey:@"broadcast"] boolValue];
@@ -30,6 +28,7 @@
     [encoder encodeObject:self.text forKey:@"text"];
     [encoder encodeObject:self.imageData forKey:@"image"];
     [encoder encodeObject:@(self.received) forKey:@"received"];
+    [encoder encodeObject:@(self.announcement) forKey:@"announcement"];
     [encoder encodeObject:self.date forKey:@"date"];
     [encoder encodeObject:@(self.mesh) forKey:@"mesh"];
     [encoder encodeObject:@(self.broadcast) forKey:@"broadcast"];

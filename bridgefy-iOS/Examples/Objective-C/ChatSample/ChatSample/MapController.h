@@ -2,8 +2,6 @@
 //  MapController.h
 //  ChatSample
 //
-//  Created by Le Tang Boon on 1/28/18.
-//
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
@@ -25,6 +23,8 @@
 @property(nonatomic,retain) CLLocationManager *locationManager;
 @property(nonatomic,retain) CLLocation *currentLocation;
 @property(strong,nonatomic) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, retain) NSString *mapPackName;
+@property (nonatomic) BOOL isMapPackageDownloaded;
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 

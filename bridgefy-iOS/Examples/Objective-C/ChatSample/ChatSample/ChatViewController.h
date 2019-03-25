@@ -2,9 +2,6 @@
 //  ChatViewController.h
 //  ChatSample
 //
-//  Created by Daniel Heredia on 7/18/16.
-//  Copyright © 2017 Bridgefy Inc. All rights reserved.
-//
 
 #import "Message.h"
 #import <UIKit/UIKit.h>
@@ -26,7 +23,9 @@ extern NSString* const broadcastConversation;
 @property (nonatomic) DeviceType deviceType;
 @property (nonatomic) BOOL online;
 @property (nonatomic) BOOL broadcastType;
+@property (nonatomic) BOOL announcementBool;
 @property (nonatomic) NSMutableArray* messages;
+@property (nonatomic) NSMutableArray* filteredMessages;
 @property (nonatomic, weak) id<ChatViewControllerDelegate> chatDelegate;
 @property(nonatomic,retain) CLLocationManager *locationManager;
 @property (nonatomic) BOOL shareLocation;
@@ -34,6 +33,7 @@ extern NSString* const broadcastConversation;
 
 - (void)addMessage:(Message*)message;
 - (void)updateOnlineTo:(BOOL)onlineStatus;
+@property (weak, nonatomic) IBOutlet UIButton *announcementBtn;
 
 
 //UI controls and actions

@@ -2,9 +2,6 @@
 //  MapPerson.h
 //  ChatSample
 //
-//  Created by Le Tang Boon on 2/23/18.
-//  Copyright © 2018 Bridgefy Inc. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 
